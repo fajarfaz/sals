@@ -57,7 +57,7 @@
 </style>
 
 
-<body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
+<body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
 
     <div class="w-max-screen text-gray-700">
 
@@ -221,6 +221,54 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <button class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" @click="alert('login');">Login</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal1" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal1 }">
+        <!--Dialog-->
+        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold border-b pb-2">Check out Form</p>
+                <div class="cursor-pointer z-50" @click="showModal1 = false">
+                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                    </svg>
+                </div>
+            </div>
+
+           
+              <div class="flex mt-6 items-center space-x-2">
+                    <label class="w-4/12 tracking-wider" for="inputEmailAddress">Product</label>
+                    <input
+                    class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"
+                    id="inputEmailAddress"
+                    name="username"
+                    type="text"
+                    placeholder="Product" value="{{$product[0]->title}}"/>
+                   
+                </div>
+                <div class="flex mt-6 items-center space-x-2"  x-data="{ count: 1 }">
+                    <label class="w-4/12 tracking-wider" for="inputPassword">Total</label>
+                    <div class="relative  px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12">
+                        <label
+                        class="" 
+                        x-text="count">                    
+                        </label>
+                        <div class="flex flex-row absolute right-0 z-10 inset-y-0 border text-xl ">
+                             <button x-on:click="count++" class="w-12 bg-white font-semibold hover:bg-gray-100" >+</button>
+                             <button x-on:click="count--" class="w-12 bg-white font-semibold hover:bg-gray-100 border-l" >-</button>                      
+                        </div>
+                    </div>
+                     
+                </div>
+               
+
+                <div class="flex justify-end mt-4 pt-4 -mx-4 border-t px-6 space-x-2 bg-gray-50">                   
+                    <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal1 = false">Close</button>
+                    <button onclick="location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product[0]->title }} dengan jumlah x-text=`count`'" class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" @click="alert('login');">Check Out</button>
+                </div>
+     
         </div>
     </div>
 
@@ -488,7 +536,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                </div>
            </div>
            <div class=" pt-0.5 rounded-lg flex space-x-6 items-center justify-center px-2 flex-row  ">
-               <button onclick="location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product[0]->title }}'" class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-4 rounded-lg font-semibold text-lg lg:text-2xl lg:w-6/12 w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto md:mb-0  ">Check Out</button>
+               <button  class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-4 rounded-lg font-semibold text-lg lg:text-2xl lg:w-6/12 w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto md:mb-0" @click="showModal1 = true" >Check Out</button>
                <label class="text-gray-500 w-6/12 font-semibold lg:text-base xl:text-lg tracking-wider" >We Have only 12 pcs</label>
            </div>
        </div>
