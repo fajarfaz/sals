@@ -13,10 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Styles -->
 
-    <script
-    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
-    defer
-    ></script> 
+     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
@@ -226,7 +223,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal1" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal1 }">
         <!--Dialog-->
-        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
 
             <div class="flex justify-between items-center pb-3">
                 <p class="text-2xl font-bold border-b pb-2">Check out Form</p>
@@ -239,36 +236,43 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
            
               <div class="flex mt-6 items-center space-x-2">
-                    <label class="w-4/12 tracking-wider" for="inputEmailAddress">Product</label>
+                    <label class="w-4/12 tracking-wider" for="inputProduct">Product</label>
                     <input
                     class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"
-                    id="inputEmailAddress"
+                    id="inputProduct"
                     name="username"
                     type="text"
                     placeholder="Product" value="{{$product[0]->title}}"/>
                    
                 </div>
-                <div class="flex mt-6 items-center space-x-2"  x-data="{ count: 1 }">
+                @php $count=1; @endphp
+                <div class="flex mt-6 items-center space-x-2"  >
                     <label class="w-4/12 tracking-wider" for="inputPassword">Total</label>
                     <div class="relative  px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12">
                         <label
                         class="" 
                         x-text="count">                    
                         </label>
+                     
                         <div class="flex flex-row absolute right-0 z-10 inset-y-0 border text-xl ">
                              <button x-on:click="count++" class="w-12 bg-white font-semibold hover:bg-gray-100" >+</button>
-                             <button x-on:click="count--" class="w-12 bg-white font-semibold hover:bg-gray-100 border-l" >-</button>                      
+                             <button  x-on:click="count--" class="w-12 bg-white font-semibold hover:bg-gray-100 border-l" >-</button>                      
                         </div>
                     </div>
-                     
+                   
+                 
                 </div>
                
 
                 <div class="flex justify-end mt-4 pt-4 -mx-4 border-t px-6 space-x-2 bg-gray-50">                   
                     <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal1 = false">Close</button>
-                    <button onclick="location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product[0]->title }} dengan jumlah x-text=`count`'" class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" @click="alert('login');">Check Out</button>
+                    <button @click="sayHello($data)" class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit">Check Out</button>
                 </div>
-     
+        <script type="text/javascript">
+            function sayHello({ count }) {
+            location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product[0]->title }} dengan jumlah '+count
+        }
+        </script>
         </div>
     </div>
 

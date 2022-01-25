@@ -19,6 +19,7 @@ class ShowProductsController extends Controller
         return $data['price'].$data['title'];
     });
       $kirim = $filterd->all();
+         $users->appends(['sort' => 'votes']);
         return view('products',[
          "sort" => 'price',
             "searching" => Product::all('title'),
