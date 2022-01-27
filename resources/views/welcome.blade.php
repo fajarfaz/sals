@@ -160,8 +160,8 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             on a whim</label>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 w-100 gap-8 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
                 <span class="border-2 border-white h-0.5 absolute inset-0 -ml-28 -mt-26 mr-24 "></span>
-                <button class=" hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold duration-300 " >Explore Now</button>
-                <button  class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold  duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</button>
+                <a href="{{ route('productshow') }}" class=" hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold duration-300 text-center" >Explore Now</a>
+                <a href="https://wa.me/088805455050?text=Saya ingin custom produk" class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold text-center duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</a>
                 <span class="border-2 border-white h-0.5 absolute inset-0 -mr-4 md:-mr-8 ml-28 lg:mt-36 md:mt-52 mt-24"></span>
             </div>
         </div>
