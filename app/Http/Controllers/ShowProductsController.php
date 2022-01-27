@@ -12,20 +12,14 @@ class ShowProductsController extends Controller
 {
     
 
-    public function price()
+    public function sort($sort)
     {
-      $collection = collect(Product::get());
-      $filterd = $collection->sortBy(function ($data, $key) {
-        return $data['price'].$data['title'];
-    });
-      $kirim = $filterd->all();
-         $users->appends(['sort' => 'votes']);
-        return view('products',[
-         "sort" => 'price',
-            "searching" => Product::all('title'),
-            "products" => Product::orderBy('price')->paginate(2)->withQueryString()        
-        
-        ]);
+      
+      return view('products',[
+        "sort" => $sort,
+        "searching" => Product::all('title'),
+        "products" => Product::orderBy('price')->paginate(3)->withQueryString(),        
+    ]);
 
     }
    
@@ -35,6 +29,7 @@ class ShowProductsController extends Controller
       
        return view('products',[
             "searching" => Product::all('title'),
+            "sort" => 'price',
             "products" => Product::latest()->paginate(2)->withQueryString()        
 
         ]);

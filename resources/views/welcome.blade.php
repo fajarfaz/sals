@@ -1,60 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>SalsProject</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Styles -->
-
-     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
-
-    <style>
-       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-       body {
-         font-family: 'Poppins', sans-serif;
-     }
-     body[data-aos-duration='4000'] [data-aos], [data-aos][data-aos][data-aos-duration='4000']{
-        transition-duration: 4000ms;
-
-    }
-    [x-cloak] {
-        display: none;
-    }
-
-    .duration-300 {
-        transition-duration: 300ms;
-    }
-
-    .ease-in {
-        transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-    }
-
-    .ease-out {
-        transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
-
-    .scale-90 {
-        transform: scale(.9);
-    }
-
-    .scale-100 {
-        transform: scale(1);
-    }
-</style>
-
-
-<body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
+@extends('layouts.guest')
+@section('content')
 
     <div class="w-max-screen text-gray-700">
 
@@ -152,75 +97,6 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
 <div style="background: url('{{ asset('images/bg-1.jpg') }}');background-size: cover; " class="lg:h-[1430px] md:h-[1330px] h-[1300px]">   
 
-    <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal }">
-        <!--Dialog-->
-        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
-
-            <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold border-b pb-2">Login Access</p>
-                <div class="cursor-pointer z-50" @click="showModal = false">
-                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <form action="{{url('proses_login')}}" method="POST" id="logForm" class="pt-4 px-3">
-                {{ csrf_field() }}
-                <div class="flex flex-row space-x-4 items-center mb-4">
-                    @error('login_gagal')
-                    {{-- <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span> --}}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{-- <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span> --}}
-                        <span class="alert-inner--text"><strong>Warning!</strong> {{ $message }}</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @enderror
-                    <label class="w-4/12 tracking-wider" for="inputEmailAddress">Username</label>
-                    <input
-                    class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"
-                    id="inputEmailAddress"
-                    name="username"
-                    type="text"
-                    placeholder="Masukkan Username"/>
-                    @if($errors->has('username'))
-                    <span class="error">{{ $errors->first('username') }}</span>
-                    @endif
-                </div>
-                <div class="flex flex-row space-x-4 items-center">
-                    <label class="w-4/12 tracking-wider" for="inputPassword">Password</label>
-                    <input
-                    class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"
-                    id="inputPassword"
-                    type="password"
-                    name="password"
-                    placeholder="Masukkan Password"/>
-                    @if($errors->has('password'))
-                    <span class="error">{{ $errors->first('password') }}</span>
-                    @endif
-                </div>
-                <div class="flex mt-6 items-center space-x-2">
-                    <div class="flex items-center space-x-2">
-                        <input class="custom-control-input p-1" id="rememberPasswordCheck" type="checkbox"/>
-                        <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
-                    </div>
-                </div>
-
-                
-
-
-                <div class="flex justify-end mt-4 pt-4 -mx-8 border-t px-6 space-x-2 bg-gray-50">                   
-                    <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal = false">Close</button>
-                    <button class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" @click="alert('login');">Login</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal1" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal1 }">
         <!--Dialog-->
         <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
@@ -258,11 +134,8 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                              <button x-on:click="count++" class="w-12 bg-white font-semibold hover:bg-gray-100" >+</button>
                              <button  x-on:click="count--" class="w-12 bg-white font-semibold hover:bg-gray-100 border-l" >-</button>                      
                         </div>
-                    </div>
-                   
-                 
-                </div>
-               
+                    </div>                 
+                </div>               
 
                 <div class="flex justify-end mt-4 pt-4 -mx-4 border-t px-6 space-x-2 bg-gray-50">                   
                     <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal1 = false">Close</button>
@@ -299,8 +172,6 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 <label class="absolute -top-10 md:top-24 md:left-auto left-0 md:-right-28 font-semibold md:rotate-90 text-xl w-max md:h-min" >OUTFIT FOR TODAY</label>     
             </div>
              
-            
-        
               
             <!--  mobile view -->
             <div class="grid grid-cols-1 gap-4 lg:gap-8 xl:gap-12 w-4/12 inline md:hidden">            
@@ -308,46 +179,54 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
               @php 
             list($width,$height )  = getimagesize('image/'.$oft->image);         
             @endphp
-            <div class="flex flex-col p-2 md:p-4 rounded-lg bg-white text-center h-min" data-aos="flip-left" data-aos-duration="1000">
+            <a href="product_detail/{{ $oft->id }}" class="flex flex-col p-2 md:p-4 rounded-lg bg-white text-center h-min" data-aos="flip-left" data-aos-duration="1000">
                 <div class="bg-gray-200 rounded-lg  mb-2 relative md:w-100 h-20  lg:h-38 xl:h-44 md:h-28"> 
                     <img src="image/{{ $oft->image }}" class="absolute inset-0 m-auto object-cover object-center p-2 @if($height > $width)  bottom-10 @else bottom-0 @endif">
                 </div>
                 <label class="text-xs md:text-md font-semibold line-clamp-2 leading-4">{{ $oft->title }}</label>
                 <label class="text-xs md:text-sm text-gray-600 pb-2">{{ $oft->brand }}</label>
-                <label class="text-xs md:text-xl font-semibold text-yellow-400">@currency($oft->price)</label>
-            </div>
+                <label class="text-xs md:text-xl font-semibold text-yellow-400 myStroke text-yellow-400">@currency($oft->price)</label>
+            </a>
             @endforeach
 
         </div>
         <label class="text-base italic tracking-wider leading-relaxed w-7/12 -mt-40 aos-init aos-animate md:hidden inline" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “</label>
     </div>
 </div>
-<div class="lg:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:px-4">
+<div class="lg:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0">
     <div class="w-4/12 flex flex-row md:space-x-1 lg:space-x-4 items-center justify-between pr-4">
         <label class="text-xl italic tracking-wider leading-relaxed w-8/12" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “</label>
-        <button class=" border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4">
-
+        <button class=" border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="leftScroll">
             <img src="{{asset('images/btn-left.svg')}}" class="w-12 object-center"></button>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 lg:gap-8 xl:gap-12 w-8/12 ">
+        <div class="relative flex flex-row gap-4 lg:gap-8 xl:gap-12 w-8/12 w-8/12 overflow-hidden pt-8 snap-x scroll-smooth" id="outfittoday" >
             
             @foreach($outfittoday as $key => $oft)
             @php 
             list($width,$height )  = getimagesize('image/'.$oft->image);         
             @endphp
-           <div class="flex flex-col p-4  rounded-lg bg-white text-center shadow-lg" data-aos="flip-left">
-            <div class="bg-gray-200 rounded-lg w-100 mb-4 relative w-100 lg:h-38 xl:h-44 md:h-28">               
-                <img src="image/{{ $oft->image }}" class="absolute inset-0 object-contain object-center m-auto max-h-52 md:p-2 lg:p-4 xl:p-0 @if($height > $width)  bottom-10 @else bottom-0 @endif" >                
-            </div>        
-            <label class="text-md font-semibold line-clamp-2 leading-5">{{ $oft->title }}</label>
-            <label class="text-sm text-gray-600 pb-2">{{ $oft->brand }}</label>
-            <label class="md:text-lg lg:text-xl font-semibold text-yellow-400">@currency($oft->price)</label>
-        </div>      
-      
+            <a href="product_detail/{{ $oft->id }}" class=" backdrop-blur bg-white/30 shadow-lg rounded-lg snap-start h-auto" >
+             <div class="group flex flex-col p-6  text-center bg-paralax your-element w-[250px]" data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1.1" data-tilt-perspective="600" > <!-- kudu diluar inner paralax -->
+               <div class="absolute bg-gradient-to-br from-white rounded-lg w-100 mb-9 m-6 w-100 lg:h-38 xl:h-44 md:h-28 group-hover:shadow-lg duration-300 inset-0"></div>
+               <div class=" w-100 mb-4 relative w-100 lg:h-38 xl:h-44 md:h-28 inner-paralax " >               
+                <img src="image/{{ $oft->image }}" class=" absolute inset-0 object-contain object-center m-auto max-h-52 md:p-2 lg:p-4 xl:p-0 @if($height > $width)  bottom-10 @else bottom-0 @endif " 
+                >                
+                 </div>        
+                    <label class="text-md font-semibold line-clamp-2 leading-5 inner-paralax">{{ $oft->title }}</label>
+                    <label class="text-sm text-gray-600 pb-2 inner-paralax">{{ $oft->brand }}</label>
+                    <label class="md:text-lg lg:text-xl font-semibold text-yellow-400 myStroke text-yellow-400">@currency($oft->price)</label>
+                </div> 
+            </a>     
+
+          
+        
             @endforeach
-       
+           
     </div>
+    <button class="absolute inset-y-0 right-20 my-auto border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="rightScroll">
+                <img src="{{asset('images/btn-left.svg')}}" class="w-12 object-center rotate-180 ">
+            </button>
 </div>
 
 
@@ -455,16 +334,16 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
     @if($product->count())
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse " data-aos="flip-left"> 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
+        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
             <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10" >SALSPROJECT</label>
-            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto">
+            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto ">
                 <img src="image/{{ $product[0]->pict1 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
                 <img src="image/{{ $product[0]->pict2 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
                 <img src="image/{{ $product[0]->pict3 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
 
             </div>        
-            <img src="image/{{$product[0]->image}}" class=" object-contain z-10 lg:w-100 xl:w-96">    
+            <img src="image/{{$product[0]->image}}" class=" object-contain z-10 lg:w-100 xl:w-96" style="  transform: translateZ(70px);">    
 
         </div>
         <div class="flex flex-col space-y-6 justify-between py-4 -mt-10 md:mt-0" data-aos="flip-right" data-aos-duration="1000">
@@ -473,7 +352,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <label class="uppercase text-4xl font-bold">{{ $product[0]->title }}</label>
                     <div class="flex flex-row space-x-2 items-center">
                         <label class="uppercase bg-purple-500 text-white px-4 py-2 text-sm font-semibold rounded-lg w-max">new arrival</label>
-                        <label class="font-semibold text-xl text-gray-500">@currency($product[0]->price)</label>
+                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)</label>
                     </div>
                 </div>
                 <!--  mobile view -->
@@ -481,7 +360,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <label class="uppercase text-3xl font-semibold">{{ $product[0]->title }}</label>
                     <div class="flex flex-row space-x-2 items-center">
                         <label class="uppercase bg-purple-500 text-white px-4 py-2 text-sm font-semibold rounded-lg w-max">new arrival</label>
-                        <label class="font-semibold text-xl text-gray-500">@currency($product[0]->price)/label>
+                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)/label>
                     </div>
                 </div>
                 <!-- end mobile view -->
@@ -515,40 +394,39 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             </div>
             <div class="flex flex-col space-y-2">
                <label class="text-xl md:text-2xl font-semibold text-center">Variant</label>
-               <div class="flex lg:space-x-4 xl:space-x-8 mx-auto space-x-4">
-                @if(strstr("$product[0]->color","yellow"))  
-                   <div class="bg-yellow-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-yellow-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","cyan"))
-                   <div class="bg-cyan-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-indigo-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","gray"))
-                   <div class="bg-gray-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-gray-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","blue"))
-                   <div class="bg-blue-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-blue-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","red"))
-                   <div class="bg-red-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-red-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","green"))
-                   <div class="bg-green-400 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-green-400/50"></div>
-                @endif
-                @if(strstr("$product[0]->color","black"))
-                   <div class="bg-gray-800 lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-gray-800/50"></div>                
-                @endif
-               </div>
+               <div class="flex lg:space-x-4 xl:space-x-8 mx-auto space-x-4 pb-6">
+                <?php                
+                  $my_array =  preg_replace('/\s+/', '',explode(",",$product[0]->color));  
+                ?>
+
+                   @foreach($my_array as $color)
+                       
+                       <div x-data="{ {{$color}}: false }"  x-on:mouseover="{{$color}} = true"  x-on:mouseleave="{{$color}} = false" class="@if($color=='white') bg-white text-gray-700 border-4 border-gray-700 @elseif($color=='black') text-white bg-gray-800 @else bg-{{ $color }}-400  @endif lg:h-9 lg:w-9 h-6 w-6 rounded-full hover:shadow-lg duration-300 hover:shadow-{{ $color }}-400/50 relative inline-flex">
+                          <div class="relative" x-cloak x-show.transition.origin.top="{{$color}}" x-transition>
+                              <div class="absolute left-0 top-0 z-10 w-auto p-2 capitalize -mt-1 text-sm leading-tight @if($color=='white') bg-white text-gray-700 @elseif($color=='black') text-white bg-gray-800 @else text-white bg-{{$color}}-500 @endif -translate-y-full  rounded-lg shadow-lg">
+                                {{$color}}
+                            </div>
+                            <svg class="absolute z-10 w-6 h-6 @if($color=='white') text-white @elseif($color=='black') text-gray-800 @else text-{{$color}}-500 @endif transform  -translate-y-3 fill-current stroke-current inset-x-0 mx-auto" width="8" height="8">
+                                <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
+                            </svg>
+                        </div>
+                       </div>
+                                    
+                   @endforeach
+
            </div>
            <div class=" pt-0.5 rounded-lg flex space-x-6 items-center justify-center px-2 flex-row  ">
                <button  class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-4 rounded-lg font-semibold text-lg lg:text-2xl lg:w-6/12 w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto md:mb-0" @click="showModal1 = true" >Check Out</button>
-               <label class="text-gray-500 w-6/12 font-semibold lg:text-base xl:text-lg tracking-wider" >We Have only 12 pcs</label>
+               <label class="text-gray-500 w-6/12 font-semibold lg:text-base xl:text-lg tracking-wider" >We Have only {{$product[0]->stock}} pcs</label>
            </div>
        </div>
    </div>
+</div>
    <label class="text-4xl font-bold tracking-wider z-10 mt-20 mb-10 capitalize" data-aos="fade-right">Others Product</label>
-   <div class="md:grid lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-20 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10">
+   <div class="md:grid lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-20 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10 ">
     @foreach ($product->skip(1) as $data)
-    <a href="product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between" data-aos="fade-up" data-aos-duration="{{$data->id}}99"> 
+    <li class="list-none" data-aos="fade-up" data-aos-duration="{{$data->id}}99">
+    <a href="product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between hover:shadow-lg hover:border-yellow-300 duration-300"> 
         <div class="flex-auto relative flex justify-between items-start md:items-center w-full">            
            <div class="flex flex-col space-y-2 w-10 text-left">
                @if(strstr("$data->color","yellow"))  
@@ -606,15 +484,16 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
         <label class="text-xl font-semibold line-clamp-2">{{$data->title}}</label>
         <label class="text-gray-500">Salsproject</label>           
     </div>
-    <label class="absolute -bottom-3 md:-bottom-4 mx-auto inset-x-0 text-2xl md:text-3xl text-yellow-400 font-bold tracking-wider text-center bg-white px-1 w-max leading-none">@currency($data->price)</label>
+    <label class="absolute -bottom-3 md:-bottom-4 mx-auto inset-x-0 text-2xl md:text-3xl text-yellow-400 font-bold tracking-wider text-center bg-white leading-none px-1 w-max leading-none myStroke text-yellow-400">@currency($data->price)</label>
 </a>
+</li>
 @endforeach
 @else
 no product
 @endif
 </div>
 <div class="flex relative items-center text-center mt-8 md:mt-20">
-    <label class="md:bg-white z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have 60 Different Product lets see</label>
+    <label class="md:bg-white z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have {{$product->count()-1}} Different Product lets see</label>
     <div class="h-1 w-full bg-gray-700 absolute inset-y-0 my-auto hidden md:inline"></div>
 </div>
 <a href="{{ route('productshow') }}" class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-lg md:text-2xl w-auto lg:w-max md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-8 mb-10 md:mb-0" data-aos="zoom-in" data-aos-duration="1000">See More</a>
@@ -635,7 +514,7 @@ no product
   <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 mt-10 mb-2 md:mb-4 text-center" data-aos="fade-down">
      ABOUT US
  </label>
- <label class="text-center text-gray-500 font-semibold md:text-2xl tracking-wider md:text-xl text-base" data-aos="fade-up">We Have 60 Different Product lets see</label>
+ <label class="text-center text-gray-500 font-semibold md:text-2xl tracking-wider md:text-xl text-base capitalize" data-aos="fade-up">make our own history so the world knows</label>
  <div class="grid grid-rows-1 md:grid-cols-2 grid-rows-2 gap-4 mt-10 md:mt-20 relative" >
     <div class="relative inline-block h-full row-span-2 border-white " style=" border-left: 8rem solid #ffffff;">
         <div class="z-10 absolute top-0 left-0 rotate-90 my-auto p-2" style="transform-origin: 0 0;">
@@ -647,7 +526,7 @@ no product
     <img src="{{asset('images/about-right.jpg')}}" class="bg-yellow-400 h-full object-cover hidden md:inline" data-aos="zoom-in"  data-aos-duration="1500">
 
     <label class="font-semibold text-sm lg:text-base xl:text-xl text-gray-500 px-6 tracking-wider leading-loose z-10 pt-4 md:pt-14 md:bg-transparent md:backdrop-blur-none backdrop-blur-sm md:bg-transparent bg-white/50 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900 first-letter:mr-3 first-letter:float-left"  data-aos="zoom-in"  data-aos-duration="1000">
-       We are a company engaged in the fashion industry, established in 2018. We
+       We are a company engaged in the fashion industry, established in 2018 from Kucur, Malang Indonesia. We
        producing t-shirts, polo shirts, shirts, jackets and jerseys for promotional t-shirts, t-shirts
        tourism, office uniforms, work uniforms, t-shirts for the community, outbound t-shirts etc.<br><br>
        <p>
@@ -656,7 +535,7 @@ no product
        various kinds of blocking/vector screen printing techniques, color separation.</p>
 
     </label>
-<div class="z-0 hidden  absolute inset-0 md:top-0 m-auto h-32 md:h-48 w-32 md:w-48 rounded-full md:flex flex-col bg-white font-semibold text-xl md:text-3xl justify-center items-center">
+<div class="z-0 hidden  absolute inset-0 md:top-0 m-auto h-32 md:h-48 w-32 md:w-48 rounded-full md:flex flex-col bg-white font-semibold text-xl md:text-3xl justify-center items-center animate-spin" style="animation: spin 7s linear infinite;">
  <label class="text-yellow-400">SALS</label>
  <label>PROJECT</label>
 </div>
@@ -751,99 +630,16 @@ $array = explode(',', $settings[0]->finishproject);
                     </div>
                 </div>
 
-                <div class="flex flex-col text-white rounded-xl px-6 py-4 w-full text-center">                   
-                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-xl w-full md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4" data-aos="zoom-in" onclick="sendMail(); return false">Mail us</button>
+                <div class="flex flex-col text-white rounded-xl px-6 py-4 w-full text-center" data-aos="zoom-in">                   
+                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-xl w-full md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4 flex items-center flex-row space-x-4 duration-300" onclick="sendMail(); return false"><i class="fas fa-paper-plane"></i> <label>Send your Idea</label></button>
                 </div>
             </div>
 
 
         </section>
-        <div class="mt-20">
+        <div class="mt-20 relative map">
+            <div class="absolute w-full h-[480px] top-0 click-map"></div>
             <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ikh5t6MYmD5sQODw3kKyQsXcHduOADxo&ehbc=2E312F" width="100%" height="480"></iframe>
         </div>
 
-        <div class="w-full  grid grid-cols-2 md:grid-cols-5 px-12 lg:text-base xl:text-lg gap-10 relative"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; height: 342.44px;" >
-            <div class="col-span-2 h-full backdrop-blur-sm bg-white/30 relative hidden py-8 px-8 md:flex flex-col lg:text-sm xl:text-base ">           
-                <div class="flex flex-row space-x-2 items-center pb-5">
-                <img src="{{asset('images/logo.png')}}" class="object-contain object-contain rounded-full h-12 w-12"> 
-                <label class="font-bold text-2xl  uppercase text-orange-400 tracking-widest">Sals<span class="text-gray-700">Project</span></label> 
-                </div>
-                <label class="text-gray-500  "> We are a company engaged in the fashion industry, established in 2018. We
-       producing t-shirts, polo shirts, shirts, jackets and jerseys for promotional t-shirts, t-shirts
-       tourism, office uniforms, work uniforms, t-shirts for the community, outbound t-shirts etc.
-                </label>        
-                <label class="italic text-gray-600 pt-1 text-sm">Kucur, Dau, Malang ID</label>
-            </div>
-            <div class="flex flex-col space-y-2 py-8 ">
-                <label class="font-semibold mb-4">MEDIA</label>
-                <a href="https://www.instagram.com/salsproject_id/" class="hover:text-blue-500 duration-300">Instagram</a>
-                <a href="#" class="hover:text-blue-500 duration-300">Facebook</a>
-                <a href="https://www.tiktok.com/@salsproject_id" class="hover:text-blue-500 duration-300">Tiktok</a>
-                <a href="#" class="hover:text-blue-500 duration-300">Lazada</a>
-                <a href="#" class="hover:text-blue-500 duration-300">Shoopee</a>
-            </div>
-            <div class="flex flex-col space-y-2 py-8">
-                <label class="font-semibold mb-4">COLLABORATION</label>
-                <label>Kedai Bunga</label>
-                <label>Karang Taruna Kucur</label>
-                <label>Desa Kucur</label>
-                <label>Omah Bunga</label>
-                <label>Souleater</label>
-            </div>
-            <div class="hidden md:flex flex-col space-y-2 py-8 text-sm">
-                <label class="font-semibold mb-4 text-lg">CONTACT</label>
-                <label class="font-semibold">Phone</label>
-                <label>+62 858-9500-1485 - Ferry </label>
-                <br>
-                <label class="font-semibold">Mail</label>
-                <label>ferrykrmdhn@gmail.com</label>  
-                <br>            
-                <button type="button" @click="showModal = true" class="text-left">login</button>
-            </div>
-            <div class="w-full bg-white h-14 absolute bottom-0 flex items-center justify-center  lg:text-sm xl:text-base font-semibold tracking-widest">
-                Copyright 2021
-
-                @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{session('error')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-<script type="text/javascript">
-    function sendMail() {
-      window.location = "mailto:xyz@yourapplicationdomain.com";
-}
-</script>
-<script type="text/javascript">
-    $('.count').each(function () {
-        $(this).prop('Counter',0).animate({
-            Counter: $(this).text()
-        }, {
-            duration: 4000,
-            easing: 'swing',
-            step: function (now) {
-                $(this).text(Math.ceil(now));
-            }
-        });
-    });
-
-</script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    var scroll = new SmoothScroll('a[href*="#"]', {
-        speed: 300
-    });
-    AOS.init();
-</script>
-</body>
-</html>
+@endsection

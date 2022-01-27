@@ -26,7 +26,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('welcome');
 Route::get('product_detail', [DashboardController::class, 'show'])->name('product_detail');
 Route::get('/product_detail/{slug}', [DashboardController::class,'show']);
 Route::get('productshow', [ShowProductsController::class,'index'])->name('productshow');
-Route::get('productshow/price', [ShowProductsController::class,'price'])->name('productshow/price');
+Route::get('productshow/sort={sort}', [ShowProductsController::class,'sort'])->name('productshow/sort={sort}');
 // Route::get('/', [ProductController::class,'show'])->name('welcome');
 
 Route::get('login', 'App\Http\Controllers\AuthController@index')->name('login');

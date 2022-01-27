@@ -6,6 +6,7 @@
 	<title>Our Products</title>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 	<script src="https://cdn.tailwindcss.com"></script>
 	<!-- Styles -->
@@ -51,6 +52,7 @@
 		.scale-100 {
 			transform: scale(1);
 		}
+		
 	</style>
 
 </head>
@@ -147,14 +149,39 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </div>
 </nav>
 
-<section class="h-auto sm:px-6 md:pt-10 lg:pt-20 pt-20 md:pb-20 lg:px-20 relative flex flex-col px-4 bg-gray-50" id="productNav"
+<section class="h-auto sm:px-6 md:pt-10 lg:pt-20 pt-20 md:pb-20 md:px-20 relative flex flex-col px-6 bg-gray-50" id="productNav"
  x-data="citySearch()">
 	<div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
-	<div class="flex flex-row justify-between items-center mt-20 mb-10">
-	<label class="text-5xl font-bold tracking-wider z-10  capitalize" data-aos="fade-right">Our Best Products</label>
-	<div class="flex flex-row justify-between items-center">
-		<input type="text" class="z-10 border px-6 py-2 rounded-lg" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-		<a href="{{ route('productshow/price') }}">fil</a>
+	<div class="flex flex-col lg:flex-row justify-between items-start md:items-center mt-8 md:mt-20 mb-16 md:mb-10 space-y-4 lg:space-y-0">
+	<label class="md:text-5xl text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Our Best Products</label>
+	<div class="flex flex-row justify-between items-center space-x-4" data-aos="fade-up">
+		<div class="relative">
+		<input type="text" class="placeholder:italic placeholder:text-slate-400 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-400 hover:border-sky-400 focus:ring-1  z-10 border pl-4 pr-10 py-2 rounded-lg text-sm duration-300" id="myInput" onkeyup="myFunction()" placeholder="Search product name.." title="Type in a name">
+		<i class="fas fa-search absolute right-4 top-3 text-center text-gray-400"></i>
+		</div>
+		<div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+    <!-- Dropdown toggle button -->
+    <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-2.5 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg">
+        <i class="fas fa-sort"></i> <span class="mr-4 hidden md:inline-block">Sorting </span>
+    </button>
+    <!-- Dropdown list -->
+    <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+        <a href="/productshow/sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+            Price (Low to High)
+        </a>
+          <a href="/productshow/sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+            Name A - Z
+        </a>
+        <a href="/productshow/sort=brand" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+            Brand A - Z
+        </a>
+        <a href="/productshow/sort=title" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+            Latest Product
+        </a> 
+        
+    </div>
+</div>
+	
 	</div>
 	</div>	
 		<!-- <div class="relative">
@@ -184,8 +211,8 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
 	<div class="md:grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-x-10 xl:gap-y-14 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10" id="myUL">
 		@foreach ($products->sortBy($sort) as $data)
-		<li class="list-none">
-		<a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between" data-aos="fade-up" data-aos-duration="{{$data->id}}99"> 
+		<li class="list-none" data-aos="fade-up" data-aos-duration="{{$data->id}}50">
+		<a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between duration-300 hover:shadow-lg hover:border-yellow-300"  > 
 			<div class="flex-auto relative flex justify-between items-start md:items-center w-full">            
 				<div class="flex flex-col space-y-2 w-10 text-left">
 					@if(strstr("$data->color","yellow"))  
@@ -239,15 +266,16 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 			</div>
 			<div class="my-4 md:mt-0 flex flex-col text-center">
 				<label class="text-xl font-semibold line-clamp-2">{{$data->title}}</label>
-				<label class="text-gray-500">Salsproject</label>           
+				<label class="text-gray-500">{{$data->brand}}</label>           
 			</div>
-			<label class="absolute -bottom-3 md:-bottom-4 mx-auto inset-x-0 text-2xl md:text-3xl text-yellow-400 font-bold tracking-wider text-center bg-white px-1 w-max leading-none">@currency($data->price)</label>
+			<label class="absolute -bottom-3 md:-bottom-4 mx-auto inset-x-0 text-2xl md:text-3xl text-white font-bold tracking-wider text-center px-1 w-max leading-none myStroke text-yellow-400">@currency($data->price)</label>
+				
 		</a>
 	</li>
 		@endforeach
 	</div>
-	<div class="z-10 border-t-2 pt-8 text-lg">
-	{{ $products->onEachSide(1)->links() }}
+	<div class="z-10 border-t-2 py-8 text-lg">
+
 	{{ $products->appends(['sort' => 'products'])->links() }}
 	</div>
 

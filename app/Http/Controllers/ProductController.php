@@ -89,6 +89,7 @@ return redirect()->route('products.index')
 
      public function show(Product $product)
     {
+
         return view('product_detail',[
             'product' => $product,
         ],compact('product'));
