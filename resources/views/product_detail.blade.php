@@ -1,57 +1,103 @@
 @extends('layouts.guest')
 @section('content')
-    <div class="w-max-screen text-gray-700">
+   <div class="w-max-screen text-gray-700">
+        <nav  x-data="{open: false , isOpen : false}" 
+        class="flex fixed items-center justify-between flex-wrap p-4 md:p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
+        x-data="{ isOpen: false }"
 
-     <nav  x-data="{open: false , isOpen : false}" 
-     class="flex fixed items-center justify-between flex-wrap p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
-     x-data="{ isOpen: false }"
-
-     @keydown.escape="isOpen = false"
-     :class="{ 'bg-white' : isOpen , 'backdrop-blur-sm bg-white/30' : !isOpen}"
-     >
-     <!--Logo etc-->
-     <div class="flex items-center flex-shrink-0 text-white mr-6">
+        @keydown.escape="isOpen = false"
+        :class="{ 'bg-white' : isOpen , 'backdrop-blur-sm bg-white/30' : !isOpen}"
+        >
+        <!--Logo etc-->
+        <div class="flex flex-row items-center flex-shrink-0 text-white mr-6">
+        <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-9 md:w-12">
         <a
         class="text-white no-underline hover:text-white hover:no-underline"
-        href="{{route('welcome')}}"
-        >
+        href="#"
+        >         
         <span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
         >SALS <span class="text-gray-700">PROJECT</span></span
         >
-    </a>
-</div>
+            </a>
+        </div>
 
-<!--Toggle button (hidden on large screens)-->
-<button
-@click="isOpen = !isOpen"
-type="button"
-class="block lg:hidden px-2 text-gray-500 hover:text-white focus:outline-none focus:text-white"
->
-<svg
-class="h-6 w-6 fill-current text-gray-700"
-xmlns="http://www.w3.org/2000/svg"
-viewBox="0 0 24 24"
->
-<path
-x-show="isOpen"
-fill-rule="evenodd"
-clip-rule="evenodd"
-d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-/>
-<path
-x-show="!isOpen"
-fill-rule="evenodd"
-d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-/>
+    <!--Toggle button (hidden on large screens)-->
+    <button
+    @click="isOpen = !isOpen"
+    type="button"
+    class="block lg:hidden px-2 text-gray-500 hover:text-white focus:outline-none focus:text-white"
+    >
+    <svg
+    class="h-6 w-6 fill-current text-gray-700"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    >
+    <path
+    x-show="isOpen"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
+    />
+    <path
+    x-show="!isOpen"
+    fill-rule="evenodd"
+    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+    />
 </svg>
 </button>
 
 <!--Menu-->
+
+
 <div
-class="w-full flex-grow lg:flex lg:items-center lg:w-auto"
+class="hidden lg:inline-flex w-full flex-grow lg:flex lg:items-center lg:w-auto"
+
+>
+<ul x-data="{whenClick:'0'}"
+class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
+>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '1'"
+    class="inline-block py-2 px-4 no-underline  transition duration-300 ease-in-out  hover:text-yellow-400 " :class="{'border-yellow-500 border-b-2 ' : whenClick == 1}"
+    href="{{route('welcome')}}#productNav"
+    @click="isOpen = false" 
+    >Product
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll x-on:click="whenClick = '2'"  :class="{'border-yellow-500 border-b-2 ' : whenClick == '2'}"
+    class="inline-block text-gray-600 no-underline hover:text-yellow-400 transition duration-300 ease-in-out hover:text-underline py-2 px-4"
+    href="{{route('welcome')}}#testimonialsNav"
+    @click="isOpen = false"
+    >Testimonials
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '3'" :class="{'border-yellow-500 border-b-2 ' : whenClick == '3'}"
+    class="inline-block text-gray-600 no-underline hover:text-yellow-400 duration-300 hover:text-underline py-2 px-4"
+    href="{{route('welcome')}}#aboutNav"
+    @click="isOpen = false"
+    >About
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '4'" :class="{'bg-indigo-500 shadow-lg' : whenClick == '4'}"
+    class="inline-block bg-yellow-400 text-white rounded-full px-8 py-2 no-underline hover:text-white duration-300 hover:bg-indigo-400 hover:text-underline "
+    href="{{route('welcome')}}#contactNav"
+    @click="isOpen = false"
+    >CONTACT
+</a>
+</li>
+</ul>
+</div>
+
+<!-- mobile -->
+<div
+class="inline-flex lg:hidden w-full flex-grow lg:flex lg:items-center lg:w-auto"
 :class="{ 'block shadow-3xl': isOpen, 'hidden': !isOpen }"
 @click.away="isOpen = false"
-x-show.transition="true"
+x-show="isOpen === true"
+x-transition
 >
 <ul x-data="{whenClick:'0'}"
 class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
@@ -92,12 +138,17 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </div>
 </nav>
 
+
+
+
+<section class="h-auto sm:px-6 md:pt-28 lg:pt-28 pt-28 md:pb-20 lg:px-20 relative flex flex-col px-6 bg-gray-50" id="productNav">
+
  <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal1" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal1 }">
         <!--Dialog-->
-        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6 absolute" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
 
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold border-b pb-2">Check out Form</p>
+                <p class="text-2xl font-bold border-b pb-2">Check out</p>
                 <div class="cursor-pointer z-50" @click="showModal1 = false">
                     <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                         <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -147,20 +198,17 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
         </div>
     </div>
 
-
-<section class="h-auto sm:px-6 md:pt-10 lg:pt-28 pt-28 md:pb-20 lg:px-20 relative flex flex-col px-6 bg-gray-50" id="productNav">
-
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse " data-aos="flip-left"> 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
+        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element " data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600" > 
             <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{ $product->brand }}</label>
-            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto">
-                <img src="/image/{{ $product->pict1 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="/image/{{ $product->pict2 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="/image/{{ $product->pict3 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto pic-paralax">
+                <img src="/image/{{ $product->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="/image/{{ $product->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="/image/{{ $product->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
 
             </div>        
-            <img src="/image/{{$product->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 min-h-[329px]">    
+            <img src="/image/{{$product->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 min-h-[329px] image-paralax">    
 
         </div>
         <div class="flex flex-col space-y-6 justify-between py-4 -mt-10 md:mt-0" data-aos="flip-right" data-aos-duration="1000">
@@ -242,9 +290,9 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </div>
 </div>
 <label class="text-4xl font-bold tracking-wider z-10 mt-20 mb-10 capitalize" data-aos="fade-right">Others Product</label>
-<div class="md:grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-x-10 xl:gap-y-14 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10">
+<div class="md:grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-x-10 xl:gap-y-14 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10" data-aos="fade-up" data-aos-duration="1000">
     @foreach ($products->where('id', '!=', $product->id); as $data)
-   <a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between duration-300 hover:shadow-lg hover:border-yellow-300" data-aos="fade-up" data-aos-duration="{{$data->id}}99"> 
+   <a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between duration-300 hover:shadow-lg hover:border-yellow-300" > 
         <div class="flex-auto relative flex justify-between items-start md:items-center w-full">            
          <div class="flex flex-col space-y-2 w-10 text-left">
             @if(strstr("$data->color","yellow"))  

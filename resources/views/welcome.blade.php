@@ -4,7 +4,7 @@
     <div class="w-max-screen text-gray-700">
 
        <nav  x-data="{open: false , isOpen : false}" 
-       class="flex fixed items-center justify-between flex-wrap p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
+       class="flex fixed items-center justify-between flex-wrap p-4 md:p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
        x-data="{ isOpen: false }"
 
        @keydown.escape="isOpen = false"
@@ -12,7 +12,7 @@
        >
        <!--Logo etc-->
        <div class="flex flex-row items-center flex-shrink-0 text-white mr-6">
-        <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-12">
+        <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-9 md:w-12">
         <a
         class="text-white no-underline hover:text-white hover:no-underline"
         href="#"
@@ -20,8 +20,8 @@
         <span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
         >SALS <span class="text-gray-700">PROJECT</span></span
         >
-    </a>
-</div>
+            </a>
+        </div>
 
 <!--Toggle button (hidden on large screens)-->
 <button
@@ -50,10 +50,53 @@ d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm
 
 <!--Menu-->
 <div
-class="w-full flex-grow lg:flex lg:items-center lg:w-auto"
+class="hidden lg:inline-flex w-full flex-grow lg:flex lg:items-center lg:w-auto">
+<ul x-data="{whenClick:'0'}"
+class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
+>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '1'"
+    class="inline-block py-2 px-4 no-underline  transition duration-300 ease-in-out  hover:text-yellow-400 " :class="{'border-yellow-500 border-b-2 ' : whenClick == 1}"
+    href="#productNav"
+    @click="isOpen = false" 
+    >Product
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll x-on:click="whenClick = '2'"  :class="{'border-yellow-500 border-b-2 ' : whenClick == '2'}"
+    class="inline-block text-gray-600 no-underline hover:text-yellow-400 transition duration-300 ease-in-out hover:text-underline py-2 px-4"
+    href="#testimonialsNav"
+    @click="isOpen = false"
+    >Testimonials
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '3'" :class="{'border-yellow-500 border-b-2 ' : whenClick == '3'}"
+    class="inline-block text-gray-600 no-underline hover:text-yellow-400 duration-300 hover:text-underline py-2 px-4"
+    href="#aboutNav"
+    @click="isOpen = false"
+    >About
+</a>
+</li>
+<li class="mr-3">
+    <a data-scroll  x-on:click="whenClick = '4'" :class="{'bg-indigo-500 shadow-lg' : whenClick == '4'}"
+    class="inline-block bg-yellow-400 text-white rounded-full px-8 py-2 no-underline hover:text-white duration-300 hover:bg-indigo-400 hover:text-underline "
+    href="#contactNav"
+    @click="isOpen = false"
+    >CONTACT
+</a>
+</li>
+</ul>
+</div>
+
+
+<!-- mobile -->
+<div
+class="inline-flex lg:hidden w-full flex-grow lg:flex lg:items-center lg:w-auto"
 :class="{ 'block shadow-3xl': isOpen, 'hidden': !isOpen }"
 @click.away="isOpen = false"
-x-show.transition="true"
+x-show="isOpen === true"
+x-transition
 >
 <ul x-data="{whenClick:'0'}"
 class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
@@ -92,6 +135,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </li>
 </ul>
 </div>
+
 </nav>
 
 
@@ -99,10 +143,10 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal1" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal1 }">
         <!--Dialog-->
-        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+        <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6 absolute" x-data="{ count: 1 }" x-show="showModal1" @click.away="showModal1 = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
 
-            <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold border-b pb-2">Check out Form</p>
+            <div class="flex justify-between items-center pb-3 border-b -mx-6 px-6">
+                <p class="text-2xl font-bold">Check out</p>
                 <div class="cursor-pointer z-50" @click="showModal1 = false">
                     <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                         <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -137,7 +181,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     </div>                 
                 </div>               
 
-                <div class="flex justify-end mt-4 pt-4 -mx-4 border-t px-6 space-x-2 bg-gray-50">                   
+                <div class="flex justify-end mt-4 pt-4 -mx-6 border-t px-6 space-x-2 bg-gray-50">                   
                     <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal1 = false">Close</button>
                     <button @click="sayHello($data)" class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit">Check Out</button>
                 </div>
@@ -158,10 +202,10 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <span class="relative text-white">innovations</span>
                 </span>
             on a whim</label>
-            <div class="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 w-100 gap-8 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
+            <div class="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 w-100 px-4 gap-6 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
                 <span class="border-2 border-white h-0.5 absolute inset-0 -ml-28 -mt-26 mr-24 "></span>
-                <a href="{{ route('productshow') }}" class=" hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold duration-300 text-center" >Explore Now</a>
-                <a href="https://wa.me/088805455050?text=Saya ingin custom produk" class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-2 px-4 md:py-4 font-semibold text-center duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</a>
+                <a href="{{ route('productshow') }}" class=" hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold duration-300 text-center" >Explore Now</a>
+                <a href="https://wa.me/088805455050?text=Saya ingin custom produk" class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold text-center duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</a>
                 <span class="border-2 border-white h-0.5 absolute inset-0 -mr-4 md:-mr-8 ml-28 lg:mt-36 md:mt-52 mt-24"></span>
             </div>
         </div>
@@ -174,12 +218,12 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
              
               
             <!--  mobile view -->
-            <div class="grid grid-cols-1 gap-4 lg:gap-8 xl:gap-12 w-4/12 inline md:hidden">            
+            <div class="grid grid-cols-1 gap-6 w-4/12 inline md:hidden snap-y scroll-smooth h-[550px] overflow-y-scroll py-6 -mt-6" id="outfittoday1">            
              @foreach($outfittoday as $key => $oft)
               @php 
             list($width,$height )  = getimagesize('image/'.$oft->image);         
             @endphp
-            <a href="product_detail/{{ $oft->id }}" class="flex flex-col p-2 md:p-4 rounded-lg bg-white text-center h-min" data-aos="flip-left" data-aos-duration="1000">
+            <a href="product_detail/{{ $oft->id }}" class="flex flex-col p-2 md:p-4 rounded-lg bg-white text-center h-min" >
                 <div class="bg-gray-200 rounded-lg  mb-2 relative md:w-100 h-20  lg:h-38 xl:h-44 md:h-28"> 
                     <img src="image/{{ $oft->image }}" class="absolute inset-0 m-auto object-cover object-center p-2 @if($height > $width)  bottom-10 @else bottom-0 @endif">
                 </div>
@@ -187,10 +231,22 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 <label class="text-xs md:text-sm text-gray-600 pb-2">{{ $oft->brand }}</label>
                 <label class="text-xs md:text-xl font-semibold text-yellow-400 myStroke text-yellow-400">@currency($oft->price)</label>
             </a>
+
             @endforeach
 
         </div>
-        <label class="text-base italic tracking-wider leading-relaxed w-7/12 -mt-40 aos-init aos-animate md:hidden inline" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “</label>
+    
+        <label class="text-sm md:text-base italic tracking-wider leading-relaxed w-7/12 -mt-40 aos-init aos-animate md:hidden inline" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “
+         <div class="md:hidden inline-block flex flex-row space-x-2 relative justify-end mt-10">
+            <button class=" inset-y-0 right-20 my-auto border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="topScroll">
+                <img src="{{asset('images/btn-left.svg')}}" class="w-12 object-center rotate-90 ">
+            </button>
+            <button class=" inset-y-0 right-20 my-auto border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="botScroll">
+                <img src="{{asset('images/btn-left.svg')}}" class="w-12 object-center -rotate-90 ">
+            </button>
+        </div>
+        </label>
+
     </div>
 </div>
 <div class="lg:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0">
@@ -218,9 +274,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <label class="md:text-lg lg:text-xl font-semibold text-yellow-400 myStroke text-yellow-400">@currency($oft->price)</label>
                 </div> 
             </a>     
-
           
-        
             @endforeach
            
     </div>
@@ -236,23 +290,23 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
         <img src="{{asset('images/client-1.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">   
          <img src="{{asset('images/client-5.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">       
        
-        <img src="{{asset('images/client-3.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-12 grayscale hover:grayscale-0 duration-300">  
+        <img src="{{asset('images/client-3.png')}}" class="snap-always snap-center shrink-0  object-cover h-8 snap-center md:h-8 lg:h-12 xl:h-12 grayscale hover:grayscale-0 duration-300">  
         <img src="{{asset('images/client-4.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">  
        
          <img src="{{asset('images/client-2.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">  
     </div>
-    <div class="mt-6 md:mt-0 mb-3 md:mb-5 lg:mb-10 flex items-center space-x-4 md:space-x-10 w-100 lg:pb-24 overflow-hidden" data-aos="fade-up">
-        <label class="font-semibold text-2xl md:text-4xl capitalize w-max ">scope of work</label>
-        <span class=" h-1.5 w-100 bg-gradient-to-r from-gray-500 flex-auto rounded-l-lg"></span>
+    <div class="mt-0 mb-3 md:mb-5 lg:mb-10 flex items-center space-x-4 md:space-x-10 w-100 lg:pb-24 overflow-hidden" data-aos="fade-up">
+        <label class="font-semibold text-xl md:text-4xl capitalize w-max ">scope of work</label>
+        <span class="h-0.5 md:h-1.5 w-100 bg-gradient-to-r from-gray-500 flex-auto rounded-l-lg"></span>
     </div>
-    <div class="flex snap-x snap-mandatory overflow-x-auto lg:overflow-hidden md:w-full w-11/12 lg:grid lg:grid-cols-5 xl:gap-8 md:gap-4 absolute z-20 inset-x-0 lg:px-20 md:px-10 px-4 lg:-mt-20 py-2 space-x-4 md:space-x-0 " data-aos="flip-up" data-aos-duration="1000">
-        <div x-data="{ plain: false }" x-on:click="plain = ! plain" class="snap-always snap-center shrink-0 backdrop-blur-sm  hover:bg-white w-36 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : plain , 'lg:h-40 md:h-32 h-32 bg-white/50' : !plain}" >
+    <div class="flex snap-x snap-mandatory overflow-x-auto lg:overflow-hidden md:w-full w-full lg:grid lg:grid-cols-5 xl:gap-8 md:gap-4 absolute z-20 inset-x-0 lg:px-20 md:px-10 px-4 lg:-mt-20 py-2 space-x-4 md:space-x-0 " data-aos="flip-up" data-aos-duration="1000">
+        <div x-data="{ plain: false }" x-on:click="plain = ! plain" class="snap-always snap-center shrink-0 backdrop-blur-sm  hover:bg-white w-32 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : plain , 'lg:h-40 md:h-32 h-32 bg-white/50' : !plain}" >
             <div class="flex h-full  flex-col space-y-2 text-center md:text-left md:pt-0 pt-1.5">
                 <div class="h-12 w-12 md:w-16 md:h-16 p-1 xl:h-16 lg:h-16 lg:w-16 xl:w-16 rounded-full bg-blue-400 flex items-center mx-auto justify-center">
                     <img src="{{asset('images/tshirt.svg')}}" class="w-10/12 md:p-1 p-0">
                 </div>
-                <label class="text-base xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center">Plain Clothes</label>
-                <div x-show="plain" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-sm">
+                <label class="text-sm xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center leading-tight">Plain Clothes</label>
+                <div x-show="plain" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-xs">
                     <ul role="list" class="marker:text-sky-400 list-disc pl-5 space-y-1 text-left text-slate-500">
                         <li>kaos & kemeja</li>
                     <li>Jersey</li>
@@ -265,13 +319,13 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 </div>
             </div>            
         </div>
-        <div x-data="{ printing: false }" x-on:click="printing = ! printing" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-36 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : printing , 'lg:h-40 md:h-32 h-32' : !printing}" >
+        <div x-data="{ printing: false }" x-on:click="printing = ! printing" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-32 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : printing , 'lg:h-40 md:h-32 h-32' : !printing}" >
             <div class="flex h-full  flex-col space-y-2 text-center md:text-left md:pt-0 pt-1.5">
                 <div class="h-12 w-12 md:w-16 md:h-16 p-1 xl:h-16 lg:h-16 lg:w-16 xl:w-16 rounded-full bg-sky-400 flex items-center mx-auto justify-center">
                     <img src="{{asset('images/print.svg')}}" class="w-10/12 md:p-1 p-0 text-gray-700">
                 </div>
-                <label class="text-base xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center">Printing Sablon</label>
-                <div x-show="printing" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-sm">
+                <label class="text-sm xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center leading-tight">Printing Sablon</label>
+                <div x-show="printing" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-xs">
                    <ul role="list" class="marker:text-sky-400 list-disc pl-5 space-y-1 text-left text-slate-500">
                     <li>Sublime</li>
                     <li>Bordir</li>
@@ -281,13 +335,13 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 </div>
             </div>              
         </div>
-        <div x-data="{ sablon: false }" x-on:click="sablon = ! sablon" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-36 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : sablon , 'lg:h-40 md:h-32 h-32' : !sablon}" >
+        <div x-data="{ sablon: false }" x-on:click="sablon = ! sablon" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-32 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : sablon , 'lg:h-40 md:h-32 h-32' : !sablon}" >
             <div class="flex h-full  flex-col space-y-2 text-center md:text-left md:pt-0 pt-1.5">
                 <div class="h-12 w-12 md:w-16 md:h-16 p-1 xl:h-16 lg:h-16 lg:w-16 xl:w-16 rounded-full bg-indigo-400 flex items-center mx-auto justify-center">
                     <img src="{{asset('images/sablon.svg')}}" class="w-11/12 md:p-1 p-0">
                 </div>
-                <label class="text-base xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center">Manual Sablon</label>
-                <div x-show="sablon" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-sm">
+                <label class="text-sm xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center leading-tight">Manual Sablon</label>
+                <div x-show="sablon" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-xs">
                     <ul role="list" class="marker:text-indigo-400 list-disc pl-5 space-y-1 text-left text-slate-500">
                      <li>Sablon Plastisol</li>
                      <li>Sablon Rubber</li>
@@ -297,13 +351,13 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 </div>
             </div>            
         </div>
-        <div x-data="{ pack: false }" x-on:click="pack = ! pack" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-36 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : pack , 'lg:h-40 md:h-32 h-32' : !pack}" >
+        <div x-data="{ pack: false }" x-on:click="pack = ! pack" class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white w-32 md:w-44 lg:w-full  max-h-full flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" :class="{ 'h-min bg-white' : pack , 'lg:h-40 md:h-32 h-32' : !pack}" >
             <div class="flex  h-full flex-col space-y-2 text-center md:text-left md:pt-0 pt-1.5">
                 <div class="h-12 w-12 md:w-16 md:h-16 p-1 xl:h-16 lg:h-16 lg:w-16 xl:w-16 rounded-full bg-blue-400 flex items-center mx-auto justify-center">
                     <img src="{{asset('images/pack.svg')}}" class="w-11/12 md:p-1 p-0">
                 </div>
-                <label class="text-base xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center">Packaging Sablon</label>
-                <div x-show="pack" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-sm">
+                <label class="text-sm xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center leading-tight">Packaging Sablon</label>
+                <div x-show="pack" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" class="flex flex-col flex-row capitalize lg:text-base text-xs">
                     <ul role="list" class="marker:text-indigo-400 list-disc pl-5 space-y-1 text-left text-slate-500">
                       <li>Papper lunch</li>
                       <li>Papper bag</li>
@@ -313,13 +367,13 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 </div>
             </div>                
         </div>
-        <div class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white duration-300 w-36 md:w-44 lg:w-full lg:h-40 md:h-32 h-32 max-h-full
+        <div class="snap-always snap-center shrink-0 backdrop-blur-sm bg-white/50 hover:bg-white duration-300 w-32 md:w-44 lg:w-full lg:h-40 md:h-32 h-32 max-h-full
         flex md:flex-row flex-col cursor-pointer rounded-xl py-3 px-2 md:px-4 lg:px-6 lg:py-4 items-center md:space-x-2 lg::space-x-4 duration-300 border justify-center" >
         <div class="flex h-full  flex-col space-y-2 text-center md:text-left md:pt-0 pt-1.5">
             <div class="h-12 w-12 md:w-16 md:h-16 p-1 xl:h-16 lg:h-16 lg:w-16 xl:w-16 rounded-full bg-green-400 flex items-center mx-auto justify-center">
                 <img src="{{asset('images/cup.svg')}}" class="w-9/12 md:p-1 p-0">
             </div>
-            <label class="text-base xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center">Cup glass Sablon</label>
+            <label class="text-sm xl:text-xl lg:text-base tracking-wide leading-none font-semibold text-center leading-tight">Cup glass Sablon</label>
         </div>                 
     </div>
     <div class="snap-center shrink-0 md:hidden inline">
@@ -329,21 +383,21 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </div>
 </section>     
 </div>
-<section class="h-auto sm:px-6 md:pt-10 lg:pt-44 pt-40 md:pb-20 lg:px-20 relative flex flex-col px-4 bg-gray-50" id="productNav">
+<section class="h-auto sm:px-6 md:pt-10 lg:pt-44 pt-28 md:pb-20 lg:px-20 relative flex flex-col px-4 bg-gray-50" id="productNav">
     <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 md:mt-20 lg:mt-10 md:mb-10 mb-2" data-aos="flip-up">OUR PRODUCT</label>
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
     @if($product->count())
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
         <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
-            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10" >SALSPROJECT</label>
-            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto ">
-                <img src="image/{{ $product[0]->pict1 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="image/{{ $product[0]->pict2 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="image/{{ $product[0]->pict3 }}" class="backdrop-grayscale hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product[0]->brand}}</label>
+            <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto pic-paralax">
+                <img src="image/{{ $product[0]->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="image/{{ $product[0]->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="image/{{ $product[0]->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
 
             </div>        
-            <img src="image/{{$product[0]->image}}" class=" object-contain z-10 lg:w-100 xl:w-96" style="  transform: translateZ(70px);">    
+            <img src="image/{{$product[0]->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 image-paralax" >    
 
         </div>
         <div class="flex flex-col space-y-6 justify-between py-4 -mt-10 md:mt-0" data-aos="flip-right" data-aos-duration="1000">
@@ -360,7 +414,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     <label class="uppercase text-3xl font-semibold">{{ $product[0]->title }}</label>
                     <div class="flex flex-row space-x-2 items-center">
                         <label class="uppercase bg-purple-500 text-white px-4 py-2 text-sm font-semibold rounded-lg w-max">new arrival</label>
-                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)/label>
+                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)</label>
                     </div>
                 </div>
                 <!-- end mobile view -->
@@ -525,7 +579,7 @@ no product
     </div>
     <img src="{{asset('images/about-right.jpg')}}" class="bg-yellow-400 h-full object-cover hidden md:inline" data-aos="zoom-in"  data-aos-duration="1500">
 
-    <label class="font-semibold text-sm lg:text-base xl:text-xl text-gray-500 px-6 tracking-wider leading-loose z-10 pt-4 md:pt-14 md:bg-transparent md:backdrop-blur-none backdrop-blur-sm md:bg-transparent bg-white/50 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900 first-letter:mr-3 first-letter:float-left"  data-aos="zoom-in"  data-aos-duration="1000">
+    <label class="font-semibold text-xs lg:text-base xl:text-xl text-gray-500 px-6 tracking-wider leading-loose z-10 pt-4 md:pt-14 md:bg-transparent md:backdrop-blur-none backdrop-blur-sm md:bg-transparent bg-white/50 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900 first-letter:mr-3 first-letter:float-left"  data-aos="zoom-in"  data-aos-duration="1000">
        We are a company engaged in the fashion industry, established in 2018 from Kucur, Malang Indonesia. We
        producing t-shirts, polo shirts, shirts, jackets and jerseys for promotional t-shirts, t-shirts
        tourism, office uniforms, work uniforms, t-shirts for the community, outbound t-shirts etc.<br><br>
@@ -542,51 +596,51 @@ no product
 <span class="z-0 hidden md:absolute bottom-0 left-0 h-48 w-48 rounded-full -ml-20 -mb-20 flex flex-col bg-white font-semibold text-3xl justify-center items-center"></span>
 </div>
 
-<label class="font-semibold text-2xl md:text-4xl mt-10 md:mt-20 mb-0 md:mb-4 lg:mb-10 border-b-2 pb-2 md:px-0 px-4 " data-aos="fade-up">Finished Project</label>
+<label class="font-semibold text-2xl md:text-4xl mt-10 md:mt-20 mb-0 md:mb-4 lg:mb-10 border-b-2 pb-2 md:px-0 px-4 md:text-left text-center" data-aos="fade-up">Finished Project</label>
 @php
 $array = explode(',', $settings[0]->finishproject);
 @endphp
 
-<div class="grid grid-cols-4 gap-2 md:gap-4 px-4 md:px-10 text-xl md:text-3xl lg:text-5xl text-gray-600 leading-none">
-    <div class="flex flex-col font-bold " >
-        <label class="font-medium text-lg lg:text-4xl md:text-2xl">Clothes</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4  md:px-10 text-xl md:text-3xl lg:text-5xl text-gray-600 leading-none md:pt-0 pt-3 md:justify-items-start justify-items-center md:text-left text-center">
+     <div class="flex flex-col font-bold " >
+        <label class="font-medium text-base lg:text-4xl md:text-2xl">Clothes</label>
         <label>+ <span class="count">{{$array[0]}} </span></label>
     </div>
     <div class="flex flex-col font-bold " >
-        <label class="font-medium text-lg lg:text-4xl md:text-2xl">Papper</label>
+        <label class="font-medium text-base lg:text-4xl md:text-2xl">Papper</label>
         <label>+ <span class="count">{{$array[1]}} </span></label>
     </div>
     <div class="flex flex-col font-bold " >
-        <label class="font-medium text-lg lg:text-4xl md:text-2xl">Plastic Cup</label>
+        <label class="font-medium text-base lg:text-4xl md:text-2xl">Plastic Cup</label>
         <label>+ <span class="count">{{$array[2]}}  </span></label>
     </div>
     <div class="flex flex-col font-bold " id="testimonialsNav">
-        <label class="font-medium text-lg lg:text-4xl md:text-2xl">Packaging</label>
+        <label class="font-medium text-base lg:text-4xl md:text-2xl">Packaging</label>
         <label>+ <span class="count">{{$array[3]}}  </span></label>
     </div>
 </div>
 </section>
 
 <section class="h-auto sm:px-6 lg:p-20 relative flex flex-col md:pt-0 pt-20 " >
-    <div class="bg-gray-200 rounded-2xl p-10 md:p-16 relative text-center" >
+    <div class="bg-gray-200 rounded-2xl py-10 px-4 md:px-16 md:py-16 relative text-center" >
         <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 absolute -top-5 md:-top-8 inset-x-0 mx-auto underline decoration-wavy decoration-sky-500" data-aos="flip-left">Testimonials</label>
-        <label class="font-semibold text-base md:text-xl text-gray-500">“ Startup Institute used their business model to create a unique aials as “</label>
+        <label class="font-semibold text-base md:text-xl text-gray-500">interesting response from  customers for us to improve our quality</label>  
 
-        <div class="flex snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 lg:mt-1 md:gap-x-12 md:gap-y-28 gap-6 pt-12 mt-4 lg:gap-8 xl:gap-12">
+        <div class="flex snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 lg:mt-1 md:gap-x-12 md:gap-y-28 gap-6 pt-8 lg:gap-12 xl:gap-16 pb-4">
             @foreach($testimonials as $testimonial)
             <div class="flex flex-col space-y-4 bg-white p-4 md:p-8 rounded-lg snap-center snap-always" data-aos="flip-up" data-aos-duration="1000">            
-                <div class="md:h-32 h-24 md:w-full w-36 bg-yellow-400 relative rounded-[20px] rounded-tl-[70px] " >
+                <div class="md:h-32 h-24 md:w-full w-44 bg-yellow-400 relative rounded-[20px] rounded-tl-[70px] " >
                     <img src="image/{{$testimonial->photo}}" class="object-contain absolute inset-x-0 mx-auto bottom-0 md:w-52 w-32"></div>
                     <label class="text-gray-600 italic xl:text-base lg:text-sm text-xs">
                         {{$testimonial->testimonial}}
                     </label>
                     <div class="flex flex-row space-x-2 mx-auto">
                         @for($i=0;$i< $testimonial->star; $i++)
-                        <img src="{{asset('images/star.svg')}}" class="object-contain w-4 h-4">
+                        <img src="{{asset('images/star.svg')}}" class="object-contain md:w-6 md:h-6 w-4 h-4">
                         @endfor
                     </div>
-                    <div class="flex flex-col">
-                        <label class="font-semibold text-lg md:text-xl">{{$testimonial->name}}</label>
+                    <div class="flex flex-col tracking-wider capitalize">
+                        <label class="font-semibold text-lg md:text-xl leading-none ">{{$testimonial->name}}</label>
                         <label class="font-semibold text-sm lg:text-base xl:text-lg text-gray-500">{{$testimonial->job}}</label>
                     </div>
                 </div>
@@ -603,9 +657,9 @@ $array = explode(',', $settings[0]->finishproject);
                     <label class="hidden md:absolute -bottom-12 tracking-wider right-0 italic font-semibold text-2xl">Est. 2015</label>
                 </div>
                 <div class="flex flex-col justify-between" >
-                    <div class="flex flex-col space-y-2" data-aos="fade-right">
+                    <div class="flex flex-col space-y-2 text-center md:text-left" data-aos="fade-right">
                        <label class="text-4xl md:text-6xl font-bold tracking-wider " >Contact US</label>
-                       <label class="text-gray-500 text-base md:text-xl mt-3">“ Startup Institute used their business model "</label>  
+                       <label class="text-gray-500 text-base md:text-xl mt-3 capitalize font-semibold">please explain your request through our contact</label>  
                    </div>               
                    <div class="md:mt-10 mt-10 p-5 bg-gray-100 rounded-full mx-auto h-40 w-40 flex justify-center items-center" data-aos="fade-up">
                      <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-28">
@@ -631,7 +685,7 @@ $array = explode(',', $settings[0]->finishproject);
                 </div>
 
                 <div class="flex flex-col text-white rounded-xl px-6 py-4 w-full text-center" data-aos="zoom-in">                   
-                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-xl w-full md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4 flex items-center flex-row space-x-4 duration-300" onclick="sendMail(); return false"><i class="fas fa-paper-plane"></i> <label>Send your Idea</label></button>
+                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-xl w-max md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4 flex items-center flex-row space-x-4 duration-300 text-center" onclick="sendMail(); return false"><i class="fas fa-paper-plane"></i> <label>Send your Idea</label></button>
                 </div>
             </div>
 

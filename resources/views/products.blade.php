@@ -1,82 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Our Products</title>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-	<script src="https://cdn.tailwindcss.com"></script>
-	<!-- Styles -->
+@extends('layouts.guest')
+@section('content')
 
-	<script
-	src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
-	defer
-	></script> 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
-
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-		body {
-			font-family: 'Poppins', sans-serif;
-		}
-		body[data-aos-duration='4000'] [data-aos], [data-aos][data-aos][data-aos-duration='4000']{
-			transition-duration: 4000ms;
-
-		}
-		[x-cloak] {
-			display: none;
-		}
-
-		.duration-300 {
-			transition-duration: 300ms;
-		}
-
-		.ease-in {
-			transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-		}
-
-		.ease-out {
-			transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-		}
-
-		.scale-90 {
-			transform: scale(.9);
-		}
-
-		.scale-100 {
-			transform: scale(1);
-		}
-		
-	</style>
-
-</head>
-<body>
 	<div class="w-max-screen text-gray-700">
-
 		<nav  x-data="{open: false , isOpen : false}" 
-		class="flex fixed items-center justify-between flex-wrap p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
+		class="flex fixed items-center justify-between flex-wrap p-4 md:p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
 		x-data="{ isOpen: false }"
 
 		@keydown.escape="isOpen = false"
 		:class="{ 'bg-white' : isOpen , 'backdrop-blur-sm bg-white/30' : !isOpen}"
 		>
 		<!--Logo etc-->
-		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<a
-			class="text-white no-underline hover:text-white hover:no-underline"
-			href="{{route('welcome')}}"
-			>
-			<span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
-			>SALS <span class="text-gray-700">PROJECT</span></span
-			>
-		</a>
-	</div>
+	    <div class="flex flex-row items-center flex-shrink-0 text-white mr-6">
+        <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-9 md:w-12">
+        <a
+        class="text-white no-underline hover:text-white hover:no-underline"
+        href="#"
+        >         
+        <span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
+        >SALS <span class="text-gray-700">PROJECT</span></span
+        >
+            </a>
+        </div>
 
 	<!--Toggle button (hidden on large screens)-->
 	<button
@@ -104,11 +48,57 @@
 </button>
 
 <!--Menu-->
+
+
 <div
-class="w-full flex-grow lg:flex lg:items-center lg:w-auto"
+class="hidden lg:inline-flex w-full flex-grow lg:flex lg:items-center lg:w-auto"
+
+>
+<ul x-data="{whenClick:'0'}"
+class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
+>
+<li class="mr-3">
+	<a data-scroll  x-on:click="whenClick = '1'"
+	class="inline-block py-2 px-4 no-underline  transition duration-300 ease-in-out  hover:text-yellow-400 " :class="{'border-yellow-500 border-b-2 ' : whenClick == 1}"
+	href="{{route('welcome')}}#productNav"
+	@click="isOpen = false" 
+	>Product
+</a>
+</li>
+<li class="mr-3">
+	<a data-scroll x-on:click="whenClick = '2'"  :class="{'border-yellow-500 border-b-2 ' : whenClick == '2'}"
+	class="inline-block text-gray-600 no-underline hover:text-yellow-400 transition duration-300 ease-in-out hover:text-underline py-2 px-4"
+	href="{{route('welcome')}}#testimonialsNav"
+	@click="isOpen = false"
+	>Testimonials
+</a>
+</li>
+<li class="mr-3">
+	<a data-scroll  x-on:click="whenClick = '3'" :class="{'border-yellow-500 border-b-2 ' : whenClick == '3'}"
+	class="inline-block text-gray-600 no-underline hover:text-yellow-400 duration-300 hover:text-underline py-2 px-4"
+	href="{{route('welcome')}}#aboutNav"
+	@click="isOpen = false"
+	>About
+</a>
+</li>
+<li class="mr-3">
+	<a data-scroll  x-on:click="whenClick = '4'" :class="{'bg-indigo-500 shadow-lg' : whenClick == '4'}"
+	class="inline-block bg-yellow-400 text-white rounded-full px-8 py-2 no-underline hover:text-white duration-300 hover:bg-indigo-400 hover:text-underline "
+	href="{{route('welcome')}}#contactNav"
+	@click="isOpen = false"
+	>CONTACT
+</a>
+</li>
+</ul>
+</div>
+
+<!-- mobile -->
+<div
+class="inline-flex lg:hidden w-full flex-grow lg:flex lg:items-center lg:w-auto"
 :class="{ 'block shadow-3xl': isOpen, 'hidden': !isOpen }"
 @click.away="isOpen = false"
-x-show.transition="true"
+x-show="isOpen === true"
+x-transition
 >
 <ul x-data="{whenClick:'0'}"
 class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semibold tracking-wide"
@@ -278,55 +268,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
 	{{ $products->appends(['sort' => 'products'])->links() }}
 	</div>
-
-	
-
 </section>
-
-<div class="w-full  grid grid-cols-2 md:grid-cols-5 px-12 lg:text-base xl:text-lg gap-10 relative"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; height: 342.44px;" >
-	<div class="col-span-2 h-full backdrop-blur-sm bg-white/30 relative hidden py-8 px-8 md:flex flex-col lg:text-sm xl:text-base ">            
-		<label class="font-bold text-2xl pb-8 uppercase text-orange-400 tracking-widest">Sals<span class="text-gray-700">Project</span></label> 
-		<label class="text-gray-500  ">Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk</label>        
-		<label class="italic text-gray-600 pt-3">Kucur, Dau, Malang ID</label>
-	</div>
-	<div class="flex flex-col space-y-2 py-8 ">
-		<label class="font-semibold mb-4">MEDIA</label>
-		<label>Amarta</label>
-		<label>Landspace</label>
-		<label>Distrotion</label>
-		<label>NorweD</label>
-		<label>Souleater</label>
-	</div>
-	<div class="flex flex-col space-y-2 py-8">
-		<label class="font-semibold mb-4">COLLABORATION</label>
-		<label>Amarta</label>
-		<label>Landspace</label>
-		<label>Distrotion</label>
-		<label>NorweD</label>
-		<label>Souleater</label>
-	</div>
-	<div class="hidden md:flex flex-col space-y-2 py-8 ">
-		<label class="font-semibold mb-4">CONTACT</label>
-		<label>Amarta</label>
-		<label>Landspace</label>
-		<label>Distrotion</label>
-		<label>NorweD</label>
-		<button type="button" @click="showModal = true" class="text-left">login</button>
-	</div>
-	<div class="w-full bg-white h-14 absolute bottom-0 flex items-center justify-center  lg:text-sm xl:text-base font-semibold tracking-widest">
-		Copyright 2021
-
-		@if(session('error'))
-		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			{{session('error')}}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		@endif
-
-	</div>
-</div>
 
 <script>
 function myFunction() {
@@ -346,7 +288,7 @@ function myFunction() {
     }
 }
 </script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script type="text/javascript">
 	function citySearch() {
 		var cities = {!! json_encode($array) !!}
@@ -370,13 +312,4 @@ function myFunction() {
   }
 }
 </script>
-<script>
-
-
-	var scroll = new SmoothScroll('a[href*="#"]', {
-		speed: 300
-	});
-	AOS.init();
-</script>
-</body>
-</html>
+@endsection

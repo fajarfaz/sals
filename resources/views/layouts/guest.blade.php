@@ -55,12 +55,22 @@
     .bg-paralax {
         transform-style: preserve-3d;
         transform: perspective(1000px);
-
     }
     .inner-paralax{
-          transform: translateZ(40px);
-       
+          transform: translateZ(40px);       
     }
+    
+    @media only screen and (max-device-width: 480px) {
+        .pic-paralax{
+          transform: translateZ(40px);       
+      }
+    }
+    @media only screen and (min-device-width: 768px) {
+      .image-paralax{
+          transform: translateZ(40px);       
+      }
+  }
+  
 </style>
 
 <body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
@@ -201,6 +211,17 @@ $("#leftScroll").click(function () {
 $("#rightScroll").click(function () { 
   var leftPos = $('#outfittoday').scrollLeft();
   $("#outfittoday").animate({scrollLeft: leftPos + 400}, 0);
+});
+$("#topScroll").click(function () { 
+  var leftPos = $('#outfittoday1').scrollTop();
+  $("#outfittoday1").animate({scrollTop: leftPos - 200}, 0);
+ 
+});
+
+$("#botScroll").click(function () { 
+    var leftPos = $('#outfittoday1').scrollTop();
+  $("#outfittoday1").animate({scrollTop: leftPos + 200}, 0);
+
 });
 
 </script>
