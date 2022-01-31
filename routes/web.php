@@ -8,6 +8,7 @@ use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\AdditionalSettingsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShowProductsController;
+use App\Http\Controllers\CategoryController;
 use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('products', ProductController::class);
         Route::resource('testimonials', TestimonialsController::class);
         Route::resource('additional_settings', AdditionalSettingsController::class);
+        Route::resource('category', CategoryController::class);
     });
     Route::group(['middleware' => ['login_check:editor']], function () {
         Route::resource('editor', AdminController::class);

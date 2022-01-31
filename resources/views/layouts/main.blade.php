@@ -154,6 +154,14 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 		>Additional Settings
 	</a>
 </li>
+<li >
+		<a :class="{'border-blue-500 border-b-2 ' : whenClick == '3'}"
+		class=" inline-block  no-underline hover:text-blue-400 duration-300 hover:text-underline py-2 px-4"
+		href="{{ route('category.index') }}"
+		@click="isOpen = false"
+		>Category Settings
+	</a>
+</li>
 </ul>
 </div>	
 </nav>

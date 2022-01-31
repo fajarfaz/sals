@@ -24,19 +24,12 @@ class DashboardController extends Controller
         $i++;
         $collection->push($item);
     }
-    
 
-   
-   
-          
-
-        return view('welcome',[
-         
+        return view('welcome',[         
             "product" => Product::all(),
             "settings" => AdditionalSettings::all(),
             "testimonials" => Testimonials::all(),
             "outfittoday" => $collection,
-           
 
         ]);
        

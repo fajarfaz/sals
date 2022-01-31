@@ -198,13 +198,13 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
         <div class="z-20 w-full md:w-7/12 flex flex-col space-y-4 md:space-y-6 lg:space-y-10 md:px-0 lg:px-8 px-5">
             <h1 class="font-bold text-4xl lg:text-5xl xl:text-6xl tracking-widest lg:leading-tight aos-init aos-animate" data-aos="zoom-in-right">Make & Use <br>your own Design</h1>
             <label class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-500" data-aos="zoom-in" data-aos-duration="1000">be prepared to make <br>the latest 
-                <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-400 mx-1 relative inline-block">
-                    <span class="relative text-white">innovations</span>
+                <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-400 mx-1 relative inline-block z-10">
+                    <span tlass="relative text-white">innovations</span>
                 </span>
             on a whim</label>
             <div class="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 w-100 px-4 gap-6 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
                 <span class="border-2 border-white h-0.5 absolute inset-0 -ml-28 -mt-26 mr-24 "></span>
-                <a href="{{ route('productshow') }}" class=" hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold duration-300 text-center" >Explore Now</a>
+                <a href="{{ route('productshow') }}" class="  hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold duration-300 text-center items-center flex justify-center" >Explore Now</a>
                 <a href="https://wa.me/088805455050?text=Saya ingin custom produk" class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold text-center duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</a>
                 <span class="border-2 border-white h-0.5 absolute inset-0 -mr-4 md:-mr-8 ml-28 lg:mt-36 md:mt-52 mt-24"></span>
             </div>
@@ -249,7 +249,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     </div>
 </div>
-<div class="lg:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0">
+<div class="md:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0">
     <div class="w-4/12 flex flex-row md:space-x-1 lg:space-x-4 items-center justify-between pr-4">
         <label class="text-xl italic tracking-wider leading-relaxed w-8/12" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “</label>
         <button class=" border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="leftScroll">
@@ -387,7 +387,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 md:mt-20 lg:mt-10 md:mb-10 mb-2" data-aos="flip-up">OUR PRODUCT</label>
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
-    @if($product->count())
+    @if($product->first()->count())
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
         <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
             <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product[0]->brand}}</label>
@@ -534,7 +534,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             @endif
     </div>
     </div>
-    <div class="my-4 md:mt-0 flex flex-col text-center">
+    <div class="mt-2 md:mt-0 flex flex-col text-center">
         <label class="text-xl font-semibold line-clamp-2">{{$data->title}}</label>
         <label class="text-gray-500">Salsproject</label>           
     </div>

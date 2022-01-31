@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -11,7 +12,9 @@ class ProductController extends Controller
  {
     $product = Product::latest()->paginate(5);
     
-    return view('admin.products.index',compact('product'))
+    return view('admin.products.index',[
+        'categories' => Category::all(),
+    ],compact('product'))
     ->with('i', (request()->input('page', 1) - 1) * 5);
     
 }
@@ -92,6 +95,7 @@ return redirect()->route('products.index')
 
         return view('product_detail',[
             'product' => $product,
+            'categories' => Category::all(),
         ],compact('product'));
     }
 
@@ -103,7 +107,9 @@ return redirect()->route('products.index')
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit',compact('product'));
+        return view('admin.products.edit',[
+            'categories' => Category::all(),
+        ],compact('product'));
     }
 
     /**
@@ -118,6 +124,7 @@ return redirect()->route('products.index')
 
         $request->validate([
             'title' => 'required',
+            'category' => 'required',
             'description' => 'required',
             'price' => 'required',
             'brand' => 'required',
@@ -141,6 +148,30 @@ return redirect()->route('products.index')
             $input['image'] = "$profileImage";
         }else{
             unset($input['image']);
+        }
+        if ($image = $request->file('pict1')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "p1." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['pict1'] = "$profileImage";
+        }else{
+            unset($input['pict1']);
+        }
+        if ($image = $request->file('pict2')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "p2." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['pict2'] = "$profileImage";
+        }else{
+            unset($input['pict2']);
+        }
+        if ($image = $request->file('pict3')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "p3." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['pict3'] = "$profileImage";
+        }else{
+            unset($input['pict3']);
         }
 
         $product->update($input);

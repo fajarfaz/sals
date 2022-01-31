@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\User;
+use App\Models;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,25 +13,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       
-         $user = [
+
+           $user = [
             [
                 'username' => 'admin',
-               'name'=>'ini akun Admin',
-               'email'=>'admin@example.com',
+                'name'=>'ini akun Admin',
+                'email'=>'admin@example.com',
                 'level'=>'admin',
-               'password'=> bcrypt('123456'),
+                'password'=> bcrypt('123456'),
             ],
             [
                 'username' => 'user',
-               'name'=>'ini akun User (non admin)',
-               'email'=>'user@example.com',
+                'name'=>'ini akun User (non admin)',
+                'email'=>'user@example.com',
                 'level'=>'editor',
-               'password'=> bcrypt('123456'),
+                'password'=> bcrypt('123456'),
             ],
         ];
-          foreach ($user as $key => $value) {
+        foreach ($user as $key => $value) {
             User::create($value);
         }
+        
+        Category::create([
+            'name' => 'Clothes',
+            'slug' => 'clothes'
+        ],
+        [
+            'name' => 'Packaging',
+            'slug' => 'packaging'
+        ],
+    
+            'name' => 'Cup Glass',
+            'slug' => 'cup_glass'
+        ]);
     }
 }

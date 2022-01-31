@@ -32,15 +32,6 @@
                     <strong class="w-4/12 tracking-wider text-gray-700">Brand:</strong>
                     <input type="text" name="brand" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter Brand"  value="{{ old('brand') }}">                
                 </div>
-                <div class="flex flex-row space-x-4 items-center mb-4">                    
-                    <strong class="w-4/12 tracking-wider text-gray-700">Category:</strong>
-                    <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category">
-                        <option selected value="">Choose One</option>
-                        @foreach ($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>                            
-                </div>
                   <div class="flex flex-row space-x-4 items-center mb-4">                    
                     <strong class="w-4/12 tracking-wider text-gray-700">Price:</strong>
                     <input type="number" name="price" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter Rupiah "  value="{{ old('price') }}">                
@@ -93,7 +84,7 @@
                     <input type="text" name="ingredients" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter Ingredients" value="{{ old('ingredients') }}">                    
                 </div>
                 <div class="flex flex-row space-x-4 items-center mb-4">                    
-                    <strong class="w-4/12 tracking-wider text-gray-700">Size:</strong>                    
+                    <strong class="w-4/12 tracking-wider text-gray-700">Size:</strong>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="flex flex-row items-center space-x-2">
                             <input type="checkbox" name="size[]" id="5" value="s"/>
@@ -173,24 +164,20 @@
                 <tr >
                     <th class="p-2">No</th>
                     <th>Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th class="w-40 ">Details</th>
+                    <th>Slug</th>                  
                     <th width="280px">Action</th>
                 </tr>
             </thead>
             <tbody class="bg-white">
-                @foreach ($product as $key => $value)
+                @foreach ($category as $key => $value)
                 <tr class="text-gray-500">
                     <td class="py-3">{{ ++$i }}</td>
-                    <td>{{ $value->title }}</td>
-                    <td>{{ $value->brand }}</td>
-                     <td> @currency($value->price)</td>
-                    <td class="py-3">{{ \Str::limit($value->description, 70) }}</td>
+                    <td>{{ $value->name }}</td>
+                    <td>{{ $value->slug }}</td>                  
                     <td>
-                        <form action="{{ route('products.destroy',$value->id) }}" method="POST" 
+                        <form action="{{ route('category.destroy',$value->id) }}" method="POST" 
                             class="flex flex-row space-x-4 items-center font-semibold justify-center py-2">                                 
-                            <a href="{{ route('products.edit',$value->id) }}" 
+                            <a href="{{ route('category.edit',$value->id) }}" 
                                 class="text-white hover:bg-yellow-500 duration-300 bg-yellow-400 py-2 px-4 rounded-lg tracking-wider">
                                 Edit
                             </a>   
@@ -207,5 +194,5 @@
         </table>  
     </div>
 </div>
-{!! $product->links() !!}      
+{!! $category->links() !!}      
 @endsection

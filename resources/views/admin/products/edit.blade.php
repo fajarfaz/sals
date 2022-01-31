@@ -26,7 +26,7 @@
     @csrf
     @method('PUT')
     
-    <div class="overflow-y-hidden">
+    <div class="overflow-y-hidden"  x-data="showImage()">
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Title:</strong>
             <input type="text" name="title" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter Title" name="title" value="{{ $product->title }}" >                    
@@ -34,6 +34,15 @@
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Brand:</strong>
             <input type="text" name="brand" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter Brand" name="brand" value="{{ $product->brand }}" >                    
+        </div>
+        <div class="flex flex-row space-x-4 items-center mb-4">                    
+            <strong class="w-4/12 tracking-wider text-gray-700">Category:</strong>
+            <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category">
+                <option value="{{$product->category->id}}" selected>{{$product->category->name}}</option>
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>                            
         </div>
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Price:</strong>
@@ -128,25 +137,24 @@
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Image:</strong>
             <div class="flex flex-row space-y-4 w-8/12 ">                    
-               <img src="/image/{{ $product->image }}" class="w-16 object-cover mr-4">                                                                      
-               <input type="file" name="image"  placeholder="image" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-full h-min" value="{{ $product->image }}"></textarea>
-
+               <img src="/image/{{ $product->image }}" class="w-16 object-cover mr-4" id="preview">                                    
+               <input type="file" name="image"  placeholder="image" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-full h-min" value="{{ $product->image }}"  accept="image/*" @change="showPreview(event)">
            </div>  
        </div>     
        <div class="flex flex-row space-x-4 items-center mb-4">                    
         <strong class="w-4/12 tracking-wider text-gray-700">Pict:</strong>
         <div class="grid grid-cols-1 gap-4">
             <div class="font-semibold flex flex-row space-x-2 items-center text-md">
-                1. <input type="file" name="pict1"  placeholder="image" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 ">
-                <img src="/image/{{ $product->pict1 }}" class="w-16 object-cover">
+                1. <input type="file" name="pict1"  placeholder="image" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" accept="image/*" @change="picPreview(event)" >
+                <img src="/image/{{ $product->pict1 }}" class="w-16 object-cover" id="picPreview">
             </div>
             <div class="font-semibold flex flex-row space-x-2 items-center text-md">
-                2. <input type="file" name="pict2"  placeholder="pict2" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 ">
-                <img src="/image/{{ $product->pict2 }}" class="w-16 object-cover">
+                2. <input type="file" name="pict2"  placeholder="pict2" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" accept="image/*" @change="picPreview1(event)" >
+                <img src="/image/{{ $product->pict2 }}" class="w-16 object-cover" id="picPreview1">
             </div>
             <div class="font-semibold flex flex-row space-x-2 items-center text-md">
-                3. <input type="file" name="pict3"  placeholder="image" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 ">
-                <img src="/image/{{ $product->pict3 }}" class="w-16 object-cover"> 
+                3. <input type="file" name="pict3"  placeholder="image" class="ml-3 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" accept="image/*" @change="picPreview2(event)" >
+                <img src="/image/{{ $product->pict3 }}" class="w-16 object-cover" id="picPreview2"> 
             </div>
         </div>
     </div>              
@@ -161,4 +169,44 @@
 </div>
 
 </form>
+
+<script>
+    function showImage() {
+        return {
+            showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("preview");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            },
+             picPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("picPreview");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            },
+            picPreview1(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("picPreview1");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            },
+            picPreview2(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("picPreview2");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            }
+        }
+    }
+
+</script>
 @endsection
