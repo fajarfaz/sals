@@ -14,7 +14,7 @@
         <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-9 md:w-12">
         <a
         class="text-white no-underline hover:text-white hover:no-underline"
-        href="#"
+        href="/"
         >         
         <span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
         >SALS <span class="text-gray-700">PROJECT</span></span
@@ -143,37 +143,57 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
  x-data="citySearch()">
 	<div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
 	<div class="flex flex-col lg:flex-row justify-between items-start md:items-center mt-8 md:mt-20 mb-16 md:mb-10 space-y-4 lg:space-y-0">
-	<label class="md:text-5xl text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Our Best Products</label>
+	
+	<label class="md:text-4xl text-3xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">{{$title}}</label>
+
 	<div class="flex flex-row justify-between items-center space-x-4" data-aos="fade-up">
-		<div class="relative">
+		<form class="relative">
 		<input type="text" class="placeholder:italic placeholder:text-slate-400 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-400 hover:border-sky-400 focus:ring-1  z-10 border pl-4 pr-10 py-2 rounded-lg text-sm duration-300" id="myInput" onkeyup="myFunction()" placeholder="Search product name.." title="Type in a name">
 		<i class="fas fa-search absolute right-4 top-3 text-center text-gray-400"></i>
+		</form>
+		<div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+			<!-- Dropdown toggle button -->
+			<button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-2.5 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg">
+				<i class="fas fa-tags"></i> <span class="mr-4 hidden md:inline-block">Category </span>
+			</button>
+			<!-- Dropdown list -->
+			<div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+				@foreach($category as $data)
+				<a href="/productshow?category={{$data->slug}}" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+					{{$data->name}}
+				</a>
+				@endforeach
+				
+			</div>
 		</div>
 		<div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
-    <!-- Dropdown toggle button -->
-    <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-2.5 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg">
-        <i class="fas fa-sort"></i> <span class="mr-4 hidden md:inline-block">Sorting </span>
-    </button>
-    <!-- Dropdown list -->
-    <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
-        <a href="/productshow/sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
-            Price (Low to High)
-        </a>
-          <a href="/productshow/sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
-            Name A - Z
-        </a>
-        <a href="/productshow/sort=brand" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
-            Brand A - Z
-        </a>
-        <a href="/productshow/sort=title" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
-            Latest Product
-        </a> 
-        
-    </div>
-</div>
+			<!-- Dropdown toggle button -->
+			<button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-2.5 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg w-max">
+				<i class="fas fa-sort"></i> <span class="mr-4 hidden md:inline-block">Sorting : {{$sort}}</span>
+			</button>
+			<!-- Dropdown list -->
+		
+			<div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+				<a href="productshow?category={{ request('category') }}&sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+					Price (Low to High)
+				</a>
+				<a href="productshow?category={{ request('category') }}&sort=title" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+					Name A - Z
+				</a>
+				<a href="productshow?category={{ request('category') }}&sort=brand" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+					Brand A - Z
+				</a>
+				<a href="productshow?category={{ request('category') }}&sort=created_at" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+					Latest Product
+				</a> 
+
+			</div>
+		</div>
+		
 	
 	</div>
 	</div>	
+
 		<!-- <div class="relative">
 		<input type="search" class="form-control z-10" placeholder="Enter Keyword here" x-model="search" value=""> 
 		<button
@@ -200,7 +220,11 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 		</ul> -->
 
 	<div class="md:grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-x-10 xl:gap-y-14 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10" id="myUL">
-		@foreach ($products->sortBy($sort) as $data)
+		
+		@if(empty($products[0]))
+		<label class="font-semibold text-xl col-span-3 z-10 italic">Sorry, No results from the search {{request('search')}}</label>
+		@else
+		@foreach ($products as $data)
 		<li class="list-none" data-aos="fade-up" data-aos-duration="{{$data->id}}50">
 		<a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between duration-300 hover:shadow-lg hover:border-yellow-300"  > 
 			<div class="flex-auto relative flex justify-between items-start md:items-center w-full">            
@@ -263,10 +287,11 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 		</a>
 	</li>
 		@endforeach
+		@endif
 	</div>
 	<div class="z-10 border-t-2 py-8 text-lg">
 
-	{{ $products->appends(['sort' => 'products'])->links() }}
+	{{ $products->links() }}
 	</div>
 </section>
 

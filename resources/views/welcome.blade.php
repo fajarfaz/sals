@@ -4,7 +4,7 @@
     <div class="w-max-screen text-gray-700">
 
        <nav  x-data="{open: false , isOpen : false}" 
-       class="flex fixed items-center justify-between flex-wrap p-4 md:p-6 px-4 md:px-16 w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
+       class="flex fixed items-center justify-between flex-wrap p-4 md:p-6 px-4 md:py-4 lg:px-20  w-screen z-30 top-0 backdrop-blur-sm bg-white/30"
        x-data="{ isOpen: false }"
 
        @keydown.escape="isOpen = false"
@@ -162,7 +162,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                     id="inputProduct"
                     name="username"
                     type="text"
-                    placeholder="Product" value="{{$product[0]->title}}"/>
+                    placeholder="Product" value="{{$product->first()->title}}"/>
                    
                 </div>
                 @php $count=1; @endphp
@@ -187,7 +187,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 </div>
         <script type="text/javascript">
             function sayHello({ count }) {
-            location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product[0]->title }} dengan jumlah '+count
+            location.href='https://wa.me/088805455050?text=Pesan%20Produk%20{{ $product->first()->title }} dengan jumlah '+count
         }
         </script>
         </div>
@@ -195,18 +195,18 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     <section class="sm:px-6 lg:p-20 relative flex flex-col md:justify-between h-full" >
        <div class="flex md:flex-row flex-col w-100 mt-24 lg:mt-10">
-        <div class="z-20 w-full md:w-7/12 flex flex-col space-y-4 md:space-y-6 lg:space-y-10 md:px-0 lg:px-8 px-5">
+        <div class="z-20 w-full md:w-7/12 flex flex-col space-y-4 md:space-y-6 lg:space-y-10 md:px-0 lg:pr-8 px-5">
             <h1 class="font-bold text-4xl lg:text-5xl xl:text-6xl tracking-widest lg:leading-tight aos-init aos-animate" data-aos="zoom-in-right">Make & Use <br>your own Design</h1>
-            <label class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-500" data-aos="zoom-in" data-aos-duration="1000">be prepared to make <br>the latest 
-                <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-400 mx-1 relative inline-block z-10">
-                    <span tlass="relative text-white">innovations</span>
+           <label class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-500" data-aos="zoom-in" data-aos-duration="1000">be prepared to make <br>the latest 
+                <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-400 mx-1 relative inline-block">
+                    <span class="relative text-white">innovations</span>
                 </span>
-            on a whim</label>
-            <div class="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-2 w-100 px-4 gap-6 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
+            on a whim</label>   
+            <div class="grid grid-cols-2 w-100 px-4 gap-6 relative pt-7 md:pt-10 md:gap-8 md:px-6 xl:px-6 lg:px-2 lg:text-xl md:text-base text-sm" data-aos="fade-right">
                 <span class="border-2 border-white h-0.5 absolute inset-0 -ml-28 -mt-26 mr-24 "></span>
                 <a href="{{ route('productshow') }}" class="  hover:bg-sky-500 cursor-pointer tracking-wider rounded-lg bg-sky-400 shadow-lg shadow-sky-400/50 text-white lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold duration-300 text-center items-center flex justify-center" >Explore Now</a>
                 <a href="https://wa.me/088805455050?text=Saya ingin custom produk" class="tracking-wider rounded-lg bg-transparent border-2 border-gray-400 text-gray-600 lg:px-3 xl:px-6 py-3 px-4 md:py-4 font-semibold text-center duration-300 hover:border-white hover:bg-white hover:text-gray-700 hover:shadow-lg">Or Custom</a>
-                <span class="border-2 border-white h-0.5 absolute inset-0 -mr-4 md:-mr-8 ml-28 lg:mt-36 md:mt-52 mt-24"></span>
+                <span class="border-2 border-white h-0.5 absolute inset-0 -mr-4 ml-28 md:mt-36 mt-24"></span>
             </div>
         </div>
         <div class="w-auto md:mt-0 mt-28 md:px-0 px-4 md:flex-none flex flex-wrap md:space-x-0 space-x-3 justify-between">
@@ -218,7 +218,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
              
               
             <!--  mobile view -->
-            <div class="grid grid-cols-1 gap-6 w-4/12 inline md:hidden snap-y scroll-smooth h-[550px] overflow-y-scroll py-6 -mt-6" id="outfittoday1">            
+            <div class="grid grid-cols-1 gap-6 w-4/12 inline md:hidden snap-y scroll-smooth h-[550px] overflow-y-scroll py-8 -mt-6" id="outfittoday1">            
              @foreach($outfittoday as $key => $oft)
               @php 
             list($width,$height )  = getimagesize('image/'.$oft->image);         
@@ -263,10 +263,10 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             list($width,$height )  = getimagesize('image/'.$oft->image);         
             @endphp
             <a href="product_detail/{{ $oft->id }}" class=" backdrop-blur bg-white/30 shadow-lg rounded-lg snap-start h-auto" >
-             <div class="group flex flex-col p-6  text-center bg-paralax your-element w-[250px]" data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1.1" data-tilt-perspective="600" > <!-- kudu diluar inner paralax -->
+             <div class="group flex flex-col p-6  text-center bg-paralax your-element md:w-[200px] lg:w-[250px]" data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1.1" data-tilt-perspective="600" > <!-- kudu diluar inner paralax -->
                <div class="absolute bg-gradient-to-br from-white rounded-lg w-100 mb-9 m-6 w-100 lg:h-38 xl:h-44 md:h-28 group-hover:shadow-lg duration-300 inset-0"></div>
                <div class=" w-100 mb-4 relative w-100 lg:h-38 xl:h-44 md:h-28 inner-paralax " >               
-                <img src="image/{{ $oft->image }}" class=" absolute inset-0 object-contain object-center m-auto max-h-52 md:p-2 lg:p-4 xl:p-0 @if($height > $width)  bottom-10 @else bottom-0 @endif " 
+                <img src="image/{{ $oft->image }}" class=" absolute inset-0 object-contain object-center m-auto lg:max-h-52 md:max-h-40 md:p-2 lg:p-4 xl:p-0 @if($height > $width)  bottom-10 @else bottom-0 @endif " 
                 >                
                  </div>        
                     <label class="text-md font-semibold line-clamp-2 leading-5 inner-paralax">{{ $oft->title }}</label>
@@ -285,7 +285,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
 
 
-<div class="lg:mt-64 md:mt-20 h-full relative lg:pb-0 md:pb-44 lg:pb-14 -mb-20 px-4 lg:px-20 md:px-10 mx-0 md:-mx-6 lg:-mx-20 md:mt-0 mt-10" style="background-color: #F5F5F5;">
+<div class="md:mt-64 h-full relative lg:pb-0 md:pb-44 lg:pb-14 -mb-20 px-4 lg:px-20 md:px-10 mx-0 md:-mx-6 lg:-mx-20 md:mt-0 mt-10" style="background-color: #F5F5F5;">
     <div class=" pt-10 md:pt-20 px-4 mx-0 md:pb-0  md:px-4 lg:px-20 pb-10 lg:-mx-20 md:mx-0 flex snap-x snap-mandatory overflow-x-auto lg:overflow-hidden md:grid md:grid-cols-5 h-auto relative w-100 md:mb-20 md:gap-8 place-items-center md:space-x-0 space-x-6" data-aos="fade-up">
         <img src="{{asset('images/client-1.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">   
          <img src="{{asset('images/client-5.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">       
@@ -387,59 +387,64 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 md:mt-20 lg:mt-10 md:mb-10 mb-2" data-aos="flip-up">OUR PRODUCT</label>
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
-    @if($product->first()->count())
+    @if($product->last()->count())
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
         <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
-            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product[0]->brand}}</label>
+            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product->first()->brand}}</label>
+            <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-5 left-5 md:top-10 md:left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300 ">
+                <i class="fas fa-tags"></i> 
+                <label>{{$product->first()->category->name}}</label>
+            </a>
             <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto pic-paralax">
-                <img src="image/{{ $product[0]->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="image/{{ $product[0]->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="image/{{ $product[0]->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="image/{{ $product->first()->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
+                <img src="image/{{ $product->first()->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
+                <img src="image/{{ $product->first()->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
 
             </div>        
-            <img src="image/{{$product[0]->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 image-paralax" >    
+            <img src="image/{{$product->first()->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 image-paralax" >    
 
         </div>
         <div class="flex flex-col space-y-6 justify-between py-4 -mt-10 md:mt-0" data-aos="flip-right" data-aos-duration="1000">
             <div class="flex flex-col space-y-0 md:space-y-4">
                 <div class="flex flex-col items-start w-100 space-y-2 md:inline-block hidden">
-                    <label class="uppercase text-4xl font-bold">{{ $product[0]->title }}</label>
+                    <label class="uppercase text-4xl font-bold">{{ $product->first()->title }}</label>
                     <div class="flex flex-row space-x-2 items-center">
                         <label class="uppercase bg-purple-500 text-white px-4 py-2 text-sm font-semibold rounded-lg w-max">new arrival</label>
-                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)</label>
+                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product->first()->price)</label>
                     </div>
                 </div>
                 <!--  mobile view -->
                 <div class="z-20 md:hidden flex flex-col w-100 pb-4">
-                    <label class="uppercase text-3xl font-semibold">{{ $product[0]->title }}</label>
+                    <label class="uppercase text-3xl font-semibold">{{ $product->first()->title }}</label>
                     <div class="flex flex-row space-x-2 items-center">
                         <label class="uppercase bg-purple-500 text-white px-4 py-2 text-sm font-semibold rounded-lg w-max">new arrival</label>
-                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product[0]->price)</label>
+                        <label class="font-semibold text-2xl text-gray-500 myStroke text-yellow-400 tracking-widest">@currency($product->first()->price)</label>
                     </div>
                 </div>
                 <!-- end mobile view -->
-                <p class="text-gray-500">{{ \Str::limit($product[0]->description, 200) }}</p>
+                <p class="text-gray-500">{{ \Str::limit($product->first()->description, 200) }}</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div class="flex flex-col space-y-2">
                     <label class="text-xl md:text-2xl font-semibold">Ingredients</label>
-                    <p class="text-gray-500">{{ $product[0]->ingredients }}</p>
+                    <p class="text-gray-500">{{ $product->first()->ingredients }}</p>
                 </div>
                 <div class="flex flex-col space-y-2">
                     <label class="text-xl md:text-2xl font-semibold">Size</label>
                     
                     <p class="text-gray-500">
-                        @if(strstr("$product[0]->size","xl"))
+                        @php $size= $product->first()->size; @endphp
+                        @if(strstr("$size","xl"))
                      Xtra Large,
                      @endif
-                     @if(strstr("$product[0]->size","l"))
+                     @if(strstr("$size","l"))
                      Large,
                      @endif
-                     @if(strstr("$product[0]->size","m"))
+                     @if(strstr("$size","m"))
                      Medium and
                      @endif
-                     @if(strstr("$product[0]->size","s"))
+                     @if(strstr("$size","s"))
                      Small
                      @endif
                </p>
@@ -450,7 +455,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                <label class="text-xl md:text-2xl font-semibold text-center">Variant</label>
                <div class="flex lg:space-x-4 xl:space-x-8 mx-auto space-x-4 pb-6">
                 <?php                
-                  $my_array =  preg_replace('/\s+/', '',explode(",",$product[0]->color));  
+                  $my_array =  preg_replace('/\s+/', '',explode(",",$product->first()->color));  
                 ?>
 
                    @foreach($my_array as $color)
@@ -471,17 +476,68 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
            </div>
            <div class=" pt-0.5 rounded-lg flex space-x-6 items-center justify-center px-2 flex-row  ">
                <button  class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-4 rounded-lg font-semibold text-lg lg:text-2xl lg:w-6/12 w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto md:mb-0" @click="showModal1 = true" >Check Out</button>
-               <label class="text-gray-500 w-6/12 font-semibold lg:text-base xl:text-lg tracking-wider" >We Have only {{$product[0]->stock}} pcs</label>
+               <label class="text-gray-500 w-6/12 font-semibold lg:text-base xl:text-lg tracking-wider" >We Have only {{$product->first()->stock}} pcs</label>
            </div>
        </div>
    </div>
 </div>
-   <label class="text-4xl font-bold tracking-wider z-10 mt-20 mb-10 capitalize" data-aos="fade-right">Others Product</label>
+    <div class="flex flex-col lg:flex-row lg:space-y-0 space-y-3 items-start lg:items-center justify-between mt-20 mb-10 ">
+     <label class="text-3xl md:text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Others Product</label>
+     <div class="flex flex-row items-center space-x-4">
+              <form action="/productshow" class="flex my-auto relative">           
+              
+                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-yellow-300" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border bg-white border rounded-md text-gray-700 px-5 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+               <div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+                <!-- Dropdown toggle button -->
+                <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-3 px-4 md:px-4 bg-white bg-white rounded-md border rounded-lg">
+                    <i class="fas fa-sort"></i> <span class="mr-4 hidden md:inline-block">Sorting</span>
+                </button>
+                <!-- Dropdown list -->
+                
+                <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+                    <a href="productshow?category={{ request('category') }}&sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Price (Low to High)
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=title" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Name A - Z
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=brand" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Brand A - Z
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=created_at" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Latest Product
+                    </a> 
+
+                </div>
+            </div>
+            <div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+                <!-- Dropdown toggle button -->
+                <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-3 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg">
+                    <i class="fas fa-tags"></i> <span class="mr-4 hidden md:inline-block">Category </span>
+                </button>
+                <!-- Dropdown list -->
+                <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+                    @foreach($category as $data)
+                    <a href="/productshow?category={{$data->slug}}" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        {{$data->name}}
+                    </a>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+
    <div class="md:grid lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-20 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10 ">
     @foreach ($product->skip(1) as $data)
     <li class="list-none" data-aos="fade-up" data-aos-duration="{{$data->id}}99">
     <a href="product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between hover:shadow-lg hover:border-yellow-300 duration-300"> 
-        <div class="flex-auto relative flex justify-between items-start md:items-center w-full">            
+        <div class="flex-auto relative flex justify-between items-start md:items-center w-full">         
+
            <div class="flex flex-col space-y-2 w-10 text-left">
                @if(strstr("$data->color","yellow"))  
                <div class="bg-yellow-400 h-3 w-3 rounded-full hover:shadow-lg duration-300 hover:shadow-yellow-400/50"></div>
@@ -506,7 +562,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                @endif
 
            </div>
-           <img src="image/{{$data->image}}" class="absolute inset-0 m-auto h-40 w-32 md:w-40 xl:w-52 md:h-64 object-contain p-1">
+           <img src="image/{{$data->image}}" class="absolute inset-0 m-auto h-32 w-32 md:w-40 xl:w-52 xl:h-52 md:h-64 object-contain p-1">
            <div class="flex flex-col text-right justify-self-start md:text-sm text-xs">
             <label class="font-semibold text-sm md:text-md">Size</label>
 
@@ -532,6 +588,10 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             @if(strstr("$data->size","s"))
             <label class="text-gray-500 md:hidden inline-block">S</label>
             @endif
+            <div class="hidden md:inline-flex">
+            <label class="font-semibold text-sm md:text-md pt-2">Category</label>
+            <label class=" text-sm">{{$data->category->name}}</label>   
+            </div>
     </div>
     </div>
     <div class="mt-2 md:mt-0 flex flex-col text-center">
@@ -547,10 +607,10 @@ no product
 @endif
 </div>
 <div class="flex relative items-center text-center mt-8 md:mt-20">
-    <label class="md:bg-white z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have {{$product->count()-1}} Different Product lets see</label>
+    <label class="md:bg-gray-50 z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have {{$product->count()-1}} Different Product lets see</label>
     <div class="h-1 w-full bg-gray-700 absolute inset-y-0 my-auto hidden md:inline"></div>
 </div>
-<a href="{{ route('productshow') }}" class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-lg md:text-2xl w-auto lg:w-max md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-8 mb-10 md:mb-0" data-aos="zoom-in" data-aos-duration="1000">See More</a>
+<a href="{{ route('productshow') }}" class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-lg md:text-2xl w-auto semd:w-max hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-8 mb-10 md:mb-0" data-aos="zoom-in" data-aos-duration="1000">See More</a>
 </section>
 
 <section class="h-auto md:px-6 px-4 lg:p-20  relative flex flex-col bg-yellow-400 md:py-0 py-5">
@@ -579,7 +639,7 @@ no product
     </div>
     <img src="{{asset('images/about-right.jpg')}}" class="bg-yellow-400 h-full object-cover hidden md:inline" data-aos="zoom-in"  data-aos-duration="1500">
 
-    <label class="font-semibold text-xs lg:text-base xl:text-xl text-gray-500 px-6 tracking-wider leading-loose z-10 pt-4 md:pt-14 md:bg-transparent md:backdrop-blur-none backdrop-blur-sm md:bg-transparent bg-white/50 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900 first-letter:mr-3 first-letter:float-left"  data-aos="zoom-in"  data-aos-duration="1000">
+    <label class="font-medium text-xs lg:text-base xl:text-lg text-gray-500 px-6 tracking-wider leading-loose z-10 pt-4 md:pt-14 md:bg-transparent md:backdrop-blur-none backdrop-blur-sm md:bg-transparent bg-white/50 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900 first-letter:mr-3 first-letter:float-left"  data-aos="zoom-in"  data-aos-duration="1000">
        We are a company engaged in the fashion industry, established in 2018 from Kucur, Malang Indonesia. We
        producing t-shirts, polo shirts, shirts, jackets and jerseys for promotional t-shirts, t-shirts
        tourism, office uniforms, work uniforms, t-shirts for the community, outbound t-shirts etc.<br><br>
@@ -671,21 +731,21 @@ $array = explode(',', $settings[0]->finishproject);
                             <label class="font-semibold ">SHOP 1</label>
                             <div class="flex flex-col border-l border-l border-red-400 pl-2 xl:text-base lg:text-sm">
                                 <label>Kucur, Dau, Malang ID</label>
-                                <label>Ferry - 08542413123</label>
+                                <label>Ferry - 0858-9500-1485 </label>
                             </div>
                         </div>
                         <div class="flex flex-col space-y-1 ">
                             <label class="font-semibold ">SHOP 2</label>
                             <div class="flex flex-col border-l border-l border-red-400 pl-2 xl:text-base lg:text-sm">
                                 <label>Pendem, Dau, Malang ID</label>
-                                <label>Ferry - 08542413123</label>
+                                <label>Ferry - 0858-9500-1485 </label>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-col text-white rounded-xl px-6 py-4 w-full text-center" data-aos="zoom-in">                   
-                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-xl w-max md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4 flex items-center flex-row space-x-4 duration-300 text-center" onclick="sendMail(); return false"><i class="fas fa-paper-plane"></i> <label>Send your Idea</label></button>
+                    <button class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-base md:text-sm lg:text-xl md:w-max hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-4 flex items-center flex-row space-x-4 duration-300 text-center" onclick="sendMail(); return false"><i class="fas fa-paper-plane"></i> <label>Send your Idea</label></button>
                 </div>
             </div>
 

@@ -28,6 +28,7 @@ public function store(Request $request)
  $request->validate([
     'title' => 'required',
     'brand' => 'required',
+    'category_id' => 'required',
     'price' => 'required',
     'size' => 'required',
     'color' => 'required',
@@ -75,7 +76,7 @@ if ($image = $request->file('pict3')) {
 Product::create($input);
 
 return redirect()->route('products.index')
-->with('success','Post created successfully.');
+->with('success','Product created successfully.');
 }
 
 
@@ -95,7 +96,7 @@ return redirect()->route('products.index')
 
         return view('product_detail',[
             'product' => $product,
-            'categories' => Category::all(),
+            'category' => Category::all(),
         ],compact('product'));
     }
 
@@ -124,7 +125,7 @@ return redirect()->route('products.index')
 
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'description' => 'required',
             'price' => 'required',
             'brand' => 'required',

@@ -34,7 +34,7 @@
                 </div>
                 <div class="flex flex-row space-x-4 items-center mb-4">                    
                     <strong class="w-4/12 tracking-wider text-gray-700">Category:</strong>
-                    <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category">
+                    <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category_id">
                         <option selected value="">Choose One</option>
                         @foreach ($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
@@ -175,6 +175,7 @@
                     <th>Name</th>
                     <th>Brand</th>
                     <th>Price</th>
+                    <th>Category</th>
                     <th class="w-40 ">Details</th>
                     <th width="280px">Action</th>
                 </tr>
@@ -186,6 +187,7 @@
                     <td>{{ $value->title }}</td>
                     <td>{{ $value->brand }}</td>
                      <td> @currency($value->price)</td>
+                    <td>@if($value->category) {{ $value->category->name }} @endif </td>
                     <td class="py-3">{{ \Str::limit($value->description, 70) }}</td>
                     <td>
                         <form action="{{ route('products.destroy',$value->id) }}" method="POST" 

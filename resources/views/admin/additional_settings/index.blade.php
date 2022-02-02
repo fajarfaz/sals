@@ -35,19 +35,19 @@
                     <strong class="w-4/12 tracking-wider text-gray-700">Finished Project:</strong>
                     <div class="w-8/12 flex flex-col space-y-2"> 
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Sablon</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Clothes Project" required value="{{ old('finishproject[]') }}" >  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Papper</label>
+                            <label class="text-gray-600 w-3/12">Papper</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Papper Project" required value="{{ old('finishproject[]') }}">  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Plastic Cup</label>
+                            <label class="text-gray-600 w-3/12">Plastic Cup</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Cup Project" required value="{{ old('finishproject[]') }}">  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Papper</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Packaging Project" required value="{{ old('finishproject[]') }}">  
                         </div>
                     </div>                  
@@ -58,9 +58,9 @@
                 </div>    
                 <div class="flex flex-row space-x-4 items-center mb-4">                    
                     <strong class="w-4/12 tracking-wider text-gray-700">Select Today Outfit:</strong>
-                    <select  name="outfittoday[]" multiple="" class="w-8/12 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 h-12">
+                    <select  name="outfittoday[]" multiple="" class="w-8/12 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 h-32">
                      @foreach ($product as $key => $value)
-                      <option value="{{$value->id}}"> {{$value->title}} </option>
+                      <option  value="{{$value->id}}"> {{$value->title}} </option>
                       @endforeach
                     </select>                      
                   </div>   
@@ -111,19 +111,19 @@
                     <strong class="w-4/12 tracking-wider text-gray-700">Finished Project:</strong>
                     <div class="w-8/12 flex flex-col space-y-2"> 
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Sablon</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Sablon Project" required value="{{ $datas[0] }}" >  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Papper</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Sablon Project" required value="{{ $datas[1] }}">  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Plastic CUp</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Sablon Project" required value="{{ $datas[2] }}">  
                         </div>
                         <div class="flex flex-row space-x-5 items-center ">
-                            <label class="text-gray-600">Sablon</label>
+                            <label class="text-gray-600 w-3/12">Papper</label>
                             <input type="number" name="finishproject[]" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200" required placeholder="Enter Count Sablon Project" required value="{{ $datas[3] }}">  
                         </div>
                     </div>                  
@@ -132,17 +132,28 @@
                     <strong class="w-4/12 tracking-wider text-gray-700">Outfit Today:</strong>
                     <input type="file" name="outfitImage"  placeholder="outfitImage" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" >
                 </div>    
+
+              
+     
+
+              
+               
+
                 <div class="flex flex-row space-x-4 items-center mb-4">                    
                     <strong class="w-4/12 tracking-wider text-gray-700">Select Today Outfit:</strong>
-                    <select  name="outfittoday[]" multiple="" class="w-8/12 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 h-12">
+                    <select  name="outfittoday[]" multiple="" class="w-8/12 px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 h-32">
+                        @php $true=0 @endphp
+                         @foreach ($product as $key => $value)                     
+                            @foreach($Outfitarray as $valie)
+                                @if($value->id == $valie)
+                                    <option value="{{$true = $value->id}}" selected > {{$value->title}} </option>                              
+                                @endif
+                            @endforeach
 
-                     @foreach ($product as $key => $value)
-                      @if (collect($Outfitarray)->Where($value))
-                      <option value="{{$value->id}}" selected> {{$value->title}} </option>
-                      @else
-                      <option value="{{$value->id}}"> {{$value->title}} </option>
-                      @endif
-                      @endforeach
+                            @if($value->id != $valie && $value->id != $true)
+                                <option value="{{$value->id}}"  > {{$value->title}} </option>
+                            @endif
+                        @endforeach
                     </select>                      
                   </div>   
 

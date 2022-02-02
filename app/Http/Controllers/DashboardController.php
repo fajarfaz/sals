@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\AdditionalSettings;
 use App\Models\Testimonials;
+use App\Models\Category;
+
 
 class DashboardController extends Controller
 {
@@ -26,11 +28,11 @@ class DashboardController extends Controller
     }
 
         return view('welcome',[         
-            "product" => Product::all(),
+            "product" => Product::all()->sortByDesc('id'),
             "settings" => AdditionalSettings::all(),
             "testimonials" => Testimonials::all(),
             "outfittoday" => $collection,
-
+            "category" => Category::all()
         ]);
        
     }
@@ -40,7 +42,7 @@ class DashboardController extends Controller
         return view('product_detail', [
         "products" => Product::all(),
         "product" => Product::find($slug),
-         
+         "category" => Category::all()
       ]);
     }
 

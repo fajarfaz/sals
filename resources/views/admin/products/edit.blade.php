@@ -25,7 +25,7 @@
 <form action="{{ route('products.update',$product->id) }}" method="POST"  enctype="multipart/form-data" >
     @csrf
     @method('PUT')
-    
+  
     <div class="overflow-y-hidden"  x-data="showImage()">
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Title:</strong>
@@ -37,10 +37,10 @@
         </div>
         <div class="flex flex-row space-x-4 items-center mb-4">                    
             <strong class="w-4/12 tracking-wider text-gray-700">Category:</strong>
-            <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category">
-                <option value="{{$product->category->id}}" selected>{{$product->category->name}}</option>
+            <select class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"  name="category_id">   
+
                 @foreach ($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
+                <option value="{{$category->id}}" @if($category->id == $product->category->id) selected @endif >{{$category->name}}</option>
                 @endforeach
             </select>                            
         </div>
@@ -163,8 +163,7 @@
         <input type="number" name="stock" class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12" placeholder="Enter stock" value="{{ $product->stock }}">                    
     </div>
 </div>
-<div class="flex justify-end mt-4 pt-4  border-t px-7 space-x-2 bg-gray-50 -mx-8 pb-10">                  
-
+<div class="flex justify-end mt-4 pt-4  border-t px-7 space-x-2 bg-gray-50 -mx-8 pb-10">                 
     <button class="px-8 tracking-wider bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" >Save</button>
 </div>
 

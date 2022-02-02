@@ -74,7 +74,7 @@
 </style>
 
 <body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
-
+<div id="loader"></div>
     <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal }">
         <!--Dialog-->
         <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
@@ -90,12 +90,11 @@
 
             <form action="{{url('proses_login')}}" method="POST" id="logForm" class="pt-4 px-3">
                 {{ csrf_field() }}
-                <div class="flex flex-row space-x-4 items-center mb-4">
                     @error('login_gagal')
                     {{-- <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span> --}}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <div class="alert alert-warning alert-dismissible fade show text-sm text-red-600" role="alert">
                         {{-- <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span> --}}
                         <span class="alert-inner--text"><strong>Warning!</strong> {{ $message }}</span>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -103,6 +102,8 @@
                         </button>
                     </div>
                     @enderror
+                <div class="flex flex-row space-x-4 items-center mb-4">
+                
                     <label class="w-4/12 tracking-wider" for="inputEmailAddress">Username</label>
                     <input
                     class="px-5 py-3 rounded-md bg-gray-100 border focus:outline-none focus:bg-gray-50 hover:border-indigo-200 w-8/12"
@@ -135,25 +136,25 @@
 
                 <div class="flex justify-end mt-4 pt-4 -mx-8 border-t px-6 space-x-2 bg-gray-50">                   
                     <button class="modal-close px-4 p-3 rounded-lg text-gray-500 hover:bg-gray-200 bg-gray-100 hover:text-gray-600 mr-2 tracking-wider font-semibold" @click="showModal = false">Close</button>
-                    <button class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" @click="alert('login');">Login</button>
+                    <button class="px-6 bg-blue-400 p-3 rounded-lg text-white hover:bg-blue-500 duration-300 font-semibold tracking-wider" type="submit" >Login</button>
                 </div>
             </form>
         </div>
     </div>
 
 @yield('content')
- 
-  <div class="w-full  grid grid-cols-2 md:grid-cols-5 px-12 lg:text-base xl:text-lg gap-10 relative"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; height: 342.44px;" >
+
+  <div class="w-full  grid grid-cols-2 md:grid-cols-5 px-6 lg:px-12 lg:text-base xl:text-lg gap-10 relative"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; height: 342.44px;" >
             <div class="col-span-2 h-full backdrop-blur-sm bg-white/30 relative hidden py-8 px-8 md:flex flex-col lg:text-sm xl:text-base ">           
                 <div class="flex flex-row space-x-2 items-center pb-5">
-                <img src="{{asset('images/logo.png')}}" class="object-contain object-contain rounded-full h-12 w-12"> 
-                <label class="font-bold text-2xl  uppercase text-orange-400 tracking-widest">Sals<span class="text-gray-700">Project</span></label> 
+                <img src="{{asset('images/logo.png')}}" class="object-contain object-contain rounded-full lg:h-12 lg:w-12 h-9 w-9"> 
+                <label class="font-bold text-xl lg:text-2xl  uppercase text-orange-400 tracking-widest">Sals<span class="text-gray-700">Project</span></label> 
                 </div>
-                <label class="text-gray-500  text-sm"> We are a company engaged in the fashion industry, established in 2018. We
+                <label class="text-gray-500 text-xs lg:text-sm"> We are a company engaged in the fashion industry, established in 2018. We
                  producing t-shirts, polo shirts, shirts, jackets and jerseys for promotional t-shirts, t-shirts
                  tourism, office uniforms, work uniforms, t-shirts for the community, outbound t-shirts etc.
                 </label>        
-                <label class="italic text-gray-600 pt-3 text-sm">Kucur, Dau, Malang ID</label>
+                <label class="italic text-gray-600 pt-3 text-xs md:text-sm">Kucur, Dau, Malang ID</label>
             </div>
             <div class="flex flex-col space-y-2 py-8 text-sm">
                 <label class="font-semibold mb-4 text-lg">MEDIA</label>
@@ -163,7 +164,7 @@
                 <a href="#" class="hover:text-blue-500 duration-300">Lazada</a>
                 <a href="#" class="hover:text-blue-500 duration-300">Shoopee</a>
             </div>
-            <div class="flex flex-col space-y-2 py-8 text-sm">
+            <div class="flex flex-col space-y-2 py-8 text-sm lg:inline-flex hidden md:col-span-2 lg:col-span-1">
                 <label class="font-semibold mb-4 text-lg">COLLABORATION</label>
                 <label>Kedai Bunga</label>
                 <label>Karang Taruna Kucur</label>
@@ -181,8 +182,8 @@
                 <br>            
                 <button type="button" @click="showModal = true" class="text-left">login</button>
             </div>
-            <div class="w-full bg-white h-14 absolute bottom-0 flex items-center justify-center  lg:text-sm xl:text-base font-semibold tracking-widest">
-                Copyright 2021
+            <div class="w-full bg-white h-14 absolute bottom-0 flex items-center justify-center md:text-xs lg:text-sm xl:text-base font-semibold tracking-widest">
+                Salsproject ©Copyright 2021
 
                 @if(session('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -200,31 +201,6 @@
 
 </div>
 
-
-<script type="text/javascript">
-
-$("#leftScroll").click(function () { 
-  var leftPos = $('#outfittoday').scrollLeft();
-  $("#outfittoday").animate({scrollLeft: leftPos - 400}, 0);
-});
-
-$("#rightScroll").click(function () { 
-  var leftPos = $('#outfittoday').scrollLeft();
-  $("#outfittoday").animate({scrollLeft: leftPos + 400}, 0);
-});
-$("#topScroll").click(function () { 
-  var leftPos = $('#outfittoday1').scrollTop();
-  $("#outfittoday1").animate({scrollTop: leftPos - 200}, 0);
- 
-});
-
-$("#botScroll").click(function () { 
-    var leftPos = $('#outfittoday1').scrollTop();
-  $("#outfittoday1").animate({scrollTop: leftPos + 200}, 0);
-
-});
-
-</script>
 <script>
     $(document).ready(function(){
         $(".map").click(function(){

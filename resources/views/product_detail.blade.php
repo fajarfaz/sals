@@ -13,7 +13,7 @@
         <img src="{{asset('images/logo.png')}}" class="object-cover object-center rounded-full w-9 md:w-12">
         <a
         class="text-white no-underline hover:text-white hover:no-underline"
-        href="#"
+        href="/"
         >         
         <span class="text-xl md:text-2xl pl-2 text-orange-500 font-semibold"
         >SALS <span class="text-gray-700">PROJECT</span></span
@@ -202,10 +202,14 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
         <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element " data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600" > 
             <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{ $product->brand }}</label>
+             <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-10 left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300">
+                <i class="fas fa-tags"></i> 
+                <label>{{$product->category->name}}</label>
+            </a>
             <div class="md:left-8 lg:left-8 bottom-8 md:bottom-10 absolute grid grid-cols-3 lg:grid-cols-1 gap-4 md:gap-6 lg:gap-8 lg:w-24 w-10/12 place-items-center z-20 my-auto pic-paralax">
-                <img src="/image/{{ $product->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="/image/{{ $product->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
-                <img src="/image/{{ $product->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-auto w-auto border rounded-lg p-2 border-gray-50">
+                <img src="/image/{{ $product->pict1 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
+                <img src="/image/{{ $product->pict2 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
+                <img src="/image/{{ $product->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
 
             </div>        
             <img src="/image/{{$product->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 min-h-[329px] image-paralax">    
@@ -289,7 +293,58 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
  </div>
 </div>
 </div>
-<label class="text-4xl font-bold tracking-wider z-10 mt-20 mb-10 capitalize" data-aos="fade-right">Others Product</label>
+
+<div class="flex flex-col lg:flex-row lg:space-y-0 space-y-3 items-start lg:items-center justify-between mt-20 mb-10 ">
+     <label class="text-3xl md:text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Others Product</label>
+     <div class="flex flex-row items-center space-x-4">
+              <form action="/productshow" class="flex my-auto relative">           
+              
+                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border bg-white border rounded-md text-gray-700 px-5 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+               <div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+                <!-- Dropdown toggle button -->
+                <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-3 px-4 md:px-4 bg-white bg-white rounded-md border rounded-lg w-max">
+                    <i class="fas fa-sort"></i> <span class="mr-4 hidden md:inline-block">Sorting</span>
+                </button>
+                <!-- Dropdown list -->
+                
+                <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+                    <a href="productshow?category={{ request('category') }}&sort=price" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Price (Low to High)
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=title" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Name A - Z
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=brand" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Brand A - Z
+                    </a>
+                    <a href="productshow?category={{ request('category') }}&sort=created_at" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        Latest Product
+                    </a> 
+
+                </div>
+            </div>
+            <div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
+                <!-- Dropdown toggle button -->
+                <button @click="dropdownMenu = ! dropdownMenu" class="flex flex-row space-x-2 hover:bg-gray-100 focus:shadow-lg items-center md:py-2 py-3 px-3 md:px-4 bg-white bg-white rounded-md border rounded-lg">
+                    <i class="fas fa-tags"></i> <span class="mr-4 hidden md:inline-block">Category </span>
+                </button>
+                <!-- Dropdown list -->
+                <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-white rounded-md shadow-xl w-44 z-20">
+                    @foreach($category as $data)
+                    <a href="/productshow?category={{$data->slug}}" class="block px-4 py-2 text-sm text-gray-600 text-gray-700 hover:bg-yellow-400 hover:text-white">
+                        {{$data->name}}
+                    </a>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="md:grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:space-x-0 space-x-6 lg:gap-8 md:gap-10 xl:gap-x-10 xl:gap-y-14 flex md:overflow-y-hidden overflow-x-auto snap-x snap-mandatory pb-8 md:pb-10" data-aos="fade-up" data-aos-duration="1000">
     @foreach ($products->where('id', '!=', $product->id); as $data)
    <a href="/product_detail/{{ $data->id }}" class="bg-white border rounded-lg w-52 md:w-full md:h-80 lg:h-72 h-60 p-4 md:p-6 flex flex-col relative snap-always snap-center shrink-0 justify-between duration-300 hover:shadow-lg hover:border-yellow-300" > 
@@ -342,6 +397,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             @if(strstr("$data->size","s"))
             <label class="text-gray-500 md:hidden inline-block">S</label>
             @endif
+            
         </div>
     </div>
     <div class="my-4 md:mt-0 flex flex-col text-center">
@@ -353,7 +409,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 @endforeach
 </div>
 <div class="flex relative items-center text-center mt-8 md:mt-20">
-    <label class="md:bg-white z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have {{$products->count()-1}} Different Product lets see</label>
+    <label class="md:bg-gray-50 z-10 text-lg md:text-xl font-semibold tracking-wider px-2 mx-auto" data-aos="zoom-in">We Have {{$products->count()-1}} Different Product lets see</label>
     <div class="h-1 w-full bg-gray-700 absolute inset-y-0 my-auto hidden md:inline"></div>
 </div>
 <a href="{{ route('productshow') }}" class="text-white shadow-lg shadow-yellow-400/50 bg-yellow-400 py-4 px-6 rounded-lg font-semibold text-lg md:text-2xl w-auto lg:w-max md:w-6/12 hover:bg-yellow-500 duration-300 tracking-wider mx-auto mt-8 mb-10 md:mb-0" data-aos="zoom-in" data-aos-duration="1000">See More</a>
