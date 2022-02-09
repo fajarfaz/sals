@@ -88,6 +88,24 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     >CONTACT
 </a>
 </li>
+<li>
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-52 tracking-wide w-full" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
+</li>
 </ul>
 </div>
 
@@ -133,6 +151,25 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     @click="isOpen = false"
     >CONTACT
 </a>
+</li>
+
+<li class="mt-4 ">
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg ml-4"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-52 tracking-wide" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
 </li>
 </ul>
 </div>
@@ -200,9 +237,9 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
-        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element " data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600" > 
-            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{ $product->brand }}</label>
-             <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-10 left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300">
+        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element md:min-h-[450px] h-[400px]" data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600" > 
+            <label class="text-5xl left-[30%] md:left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-4 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{ $product->brand }}</label>
+             <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-5 left-5 md:top-10 md:left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300 md:text-base text-sm">
                 <i class="fas fa-tags"></i> 
                 <label>{{$product->category->name}}</label>
             </a>
@@ -297,9 +334,8 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 <div class="flex flex-col lg:flex-row lg:space-y-0 space-y-3 items-start lg:items-center justify-between mt-20 mb-10 ">
      <label class="text-3xl md:text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Others Product</label>
      <div class="flex flex-row items-center space-x-4">
-              <form action="/productshow" class="flex my-auto relative">           
-              
-                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16" placeholder="Search .." value="{{request('search')}}">     
+              <form action="/productshow" class="flex my-auto relative">          
+                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16 w-full" placeholder="Search .." value="{{request('search')}}">     
                 <button type="submit"  class="absolute right-0 inset-y-0 border bg-white border rounded-md text-gray-700 px-5 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100">
                 <i class="fas fa-search"></i>
                 </button>

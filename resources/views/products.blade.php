@@ -89,6 +89,25 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 	>CONTACT
 </a>
 </li>
+
+<li>
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-full tracking-wide" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
+</li>
 </ul>
 </div>
 
@@ -135,6 +154,25 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 	>CONTACT
 </a>
 </li>
+
+<li class="mt-4 ">
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg ml-4"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-52 tracking-wide" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
+</li>
 </ul>
 </div>
 </nav>
@@ -148,7 +186,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
 	<div class="flex flex-row justify-between items-center space-x-4" data-aos="fade-up">
 		<form class="relative">
-		<input type="text" class="placeholder:italic placeholder:text-slate-400 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-400 hover:border-sky-400 focus:ring-1  z-10 border pl-4 pr-10 py-2 rounded-lg text-sm duration-300" id="myInput" onkeyup="myFunction()" placeholder="Search product name.." title="Type in a name">
+		<input type="text" class="placeholder:italic placeholder:text-slate-400 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-400 hover:border-sky-400 focus:ring-1  z-10 border pl-4 pr-10 py-2 rounded-lg text-sm duration-300 w-full" id="myInput" onkeyup="myFunction()" placeholder="Search product name.." title="Type in a name">
 		<i class="fas fa-search absolute right-4 top-3 text-center text-gray-400"></i>
 		</form>
 		<div x-data="{dropdownMenu: false}" class="relative" @click.away="dropdownMenu = false">
@@ -281,7 +319,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 			<div class="my-4 md:mt-0 flex flex-col text-center">
 				<label class="text-xl font-semibold line-clamp-2">{{$data->title}}</label>
 				<label class="text-gray-500">{{$data->brand}}</label>           
-			</div>
+			</div>   
 			<label class="absolute -bottom-3 md:-bottom-4 mx-auto inset-x-0 text-2xl md:text-3xl text-white font-bold tracking-wider text-center px-1 w-max leading-none myStroke text-yellow-400">@currency($data->price)</label>
 				
 		</a>

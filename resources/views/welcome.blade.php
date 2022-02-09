@@ -86,6 +86,24 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     >CONTACT
 </a>
 </li>
+<li>
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-52 tracking-wide" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
+</li>
 </ul>
 </div>
 
@@ -132,6 +150,25 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
     @click="isOpen = false"
     >CONTACT
 </a>
+</li>
+
+<li class="mt-4 ">
+    <div class=" text-gray-800 rounded-full flex flex-row items-center" x-data="{ searchTool : false}" > 
+     <i class="fas fa-search hover:text-blue-500 duration-300 cursor-pointer text-lg ml-4"  x-on:click="searchTool =! searchTool" x-show="!searchTool"></i>
+      
+     <div x-show="searchTool" x-transition>
+          <form action="/productshow" class="flex my-auto relative">   
+            <button type="button" class="absolute left-4 inset-y-0">       
+                 <i class="fas fa-times text-red-400 hover:text-red-600"  x-on:click="searchTool =! searchTool" x-show="searchTool"></i>
+             </button> 
+                <input type="text" name="search" class="border bg-gray-200 pl-8 py-2 rounded-full h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-52 tracking-wide" placeholder="Search .." value="{{request('search')}}">     
+                <button type="submit"  class="absolute right-0 inset-y-0 border border rounded-r-full text-gray-700 px-4 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100 duration-300 hover:text-blue-500">
+                <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+     </div>
+     </div>
 </li>
 </ul>
 </div>
@@ -249,7 +286,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 
     </div>
 </div>
-<div class="md:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0">
+<div class="md:absolute bottom-0 md:top-44 lg:top-32 lg:space-x-7 xl:space-x-12 justify-between items-center w-100 md:flex hidden lg:pl-20 inset-0 md:px-6">
     <div class="w-4/12 flex flex-row md:space-x-1 lg:space-x-4 items-center justify-between pr-4">
         <label class="text-xl italic tracking-wider leading-relaxed w-8/12" data-aos="zoom-in-right">“ Achieve the dream of building your own brand now with us “</label>
         <button class=" border hover:shadow-lg shadow-gray-400/50 bg-white flex lg:h-16 lg:w-16 h-12 w-12 rounded-full items-center justify-center duration-300 p-4"  id="leftScroll">
@@ -295,7 +332,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
        
          <img src="{{asset('images/client-2.png')}}" class="snap-always snap-center shrink-0  object-cover h-12 snap-center md:h-8 lg:h-12 xl:h-20 grayscale hover:grayscale-0 duration-300">  
     </div>
-    <div class="mt-0 mb-3 md:mb-5 lg:mb-10 flex items-center space-x-4 md:space-x-10 w-100 lg:pb-24 overflow-hidden" data-aos="fade-up">
+    <div class="mt-10 mb-3 md:mb-5 lg:mb-10 flex items-center space-x-4 md:space-x-10 w-100 lg:pb-24 overflow-hidden" data-aos="fade-up">
         <label class="font-semibold text-xl md:text-4xl capitalize w-max ">scope of work</label>
         <span class="h-0.5 md:h-1.5 w-100 bg-gradient-to-r from-gray-500 flex-auto rounded-l-lg"></span>
     </div>
@@ -383,15 +420,15 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
 </div>
 </section>     
 </div>
-<section class="h-auto sm:px-6 md:pt-10 lg:pt-44 pt-28 md:pb-20 lg:px-20 relative flex flex-col px-4 bg-gray-50" id="productNav">
+<section class="h-auto sm:px-6 md:pt-10 lg:pt-44 pt-48 md:pb-20 lg:px-20 relative flex flex-col px-4 bg-gray-50" id="productNav">
     <label class="text-4xl md:text-6xl font-bold tracking-wider z-10 md:mt-20 lg:mt-10 md:mb-10 mb-2" data-aos="flip-up">OUR PRODUCT</label>
 
     <div class="h-100 border-4 md:border-8 border-yellow-400 w-2 bg-yellow-400 absolute top-0 bottom-0 ml-24"></div>
     @if($product->last()->count())
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="flip-left">
-        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
-            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-2 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product->first()->brand}}</label>
-            <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-5 left-5 md:top-10 md:left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300 ">
+        <div class="bg-blue-100 flex flex-col lg:flex-row rounded-xl p-8 relative md:flex-col-reverse justify-end flex-col-reverse bg-paralax your-element md:min-h-[450px] h-[400px]"  data-tilt-max="15" data-tilt-speed="5000" data-tilt-max-glare="0.8" data-tilt-scale="1" data-tilt-perspective="600"> 
+            <label class="text-5xl left-[40%] rotate-90 md:rotate-45 lg:rotate-90 font-semibold md:text-5xl lg:text-6xl absolute text-gray-500 inset-y-4 my-auto md:left-0 lg:left-40 xl:left-80 h-min -z-10 uppercase" >{{$product->first()->brand}}</label>
+            <a href="/productshow?category={{$product->first()->category->slug}}" class="bg-white rounded-lg font-semibold px-4 py-2 absolute top-5 left-5 md:top-10 md:left-10 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 duration-300 md:text-base text-sm">
                 <i class="fas fa-tags"></i> 
                 <label>{{$product->first()->category->name}}</label>
             </a>
@@ -401,7 +438,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
                 <img src="image/{{ $product->first()->pict3 }}" class="bg-white/30 backdrop-blur-sm hover:scale-125 duration-300 object-cover h-20 w-20 border rounded-lg p-2 border-gray-50">
 
             </div>        
-            <img src="image/{{$product->first()->image}}" class=" object-contain z-10 lg:w-100 xl:w-96 image-paralax" >    
+            <img src="image/{{$product->first()->image}}" class="object-contain object-center z-10 lg:w-100 xl:w-96 image-paralax h-[350px]" >    
 
         </div>
         <div class="flex flex-col space-y-6 justify-between py-4 -mt-10 md:mt-0" data-aos="flip-right" data-aos-duration="1000">
@@ -482,11 +519,11 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
    </div>
 </div>
     <div class="flex flex-col lg:flex-row lg:space-y-0 space-y-3 items-start lg:items-center justify-between mt-20 mb-10 ">
-     <label class="text-3xl md:text-4xl font-bold tracking-wider z-10 capitalize" data-aos="fade-right">Others Product</label>
+     <label class="text-3xl md:text-4xl font-bold tracking-wider z-10 capitalize" data-aos="flip-left">Others Product</label>
      <div class="flex flex-row items-center space-x-4">
               <form action="/productshow" class="flex my-auto relative">           
               
-                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-yellow-300" placeholder="Search .." value="{{request('search')}}">     
+                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-full" placeholder="Search .." value="{{request('search')}}">     
                 <button type="submit"  class="absolute right-0 inset-y-0 border bg-white border rounded-md text-gray-700 px-5 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100">
                 <i class="fas fa-search"></i>
                 </button>
@@ -588,10 +625,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             @if(strstr("$data->size","s"))
             <label class="text-gray-500 md:hidden inline-block">S</label>
             @endif
-            <div class="hidden md:inline-flex">
-            <label class="font-semibold text-sm md:text-md pt-2">Category</label>
-            <label class=" text-sm">{{$data->category->name}}</label>   
-            </div>
+          
     </div>
     </div>
     <div class="mt-2 md:mt-0 flex flex-col text-center">

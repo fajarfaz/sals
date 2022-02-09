@@ -144,7 +144,7 @@
 
 @yield('content')
 
-  <div class="w-full  grid grid-cols-2 md:grid-cols-5 px-6 lg:px-12 lg:text-base xl:text-lg gap-10 relative"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; height: 342.44px;" >
+  <div class="w-full  grid grid-cols-2 md:grid-cols-5 px-6 lg:px-12 lg:text-base xl:text-lg gap-10 relative md:text-left text-center md:h-[342.44px] h-[300px]"  style="background: url('{{ asset('images/bg-2.jpg') }}');background-size: cover; " >
             <div class="col-span-2 h-full backdrop-blur-sm bg-white/30 relative hidden py-8 px-8 md:flex flex-col lg:text-sm xl:text-base ">           
                 <div class="flex flex-row space-x-2 items-center pb-5">
                 <img src="{{asset('images/logo.png')}}" class="object-contain object-contain rounded-full lg:h-12 lg:w-12 h-9 w-9"> 
@@ -164,13 +164,13 @@
                 <a href="#" class="hover:text-blue-500 duration-300">Lazada</a>
                 <a href="#" class="hover:text-blue-500 duration-300">Shoopee</a>
             </div>
-            <div class="flex flex-col space-y-2 py-8 text-sm lg:inline-flex hidden md:col-span-2 lg:col-span-1">
+            <div class="flex flex-col space-y-2 py-8 text-sm  md:col-span-2 lg:col-span-1">
                 <label class="font-semibold mb-4 text-lg">COLLABORATION</label>
                 <label>Kedai Bunga</label>
                 <label>Karang Taruna Kucur</label>
                 <label>Desa Kucur</label>
                 <label>Omah Bunga</label>
-                <label>Souleater</label>
+                <label>Adn Dev</label>
             </div>
             <div class="hidden md:flex flex-col space-y-2 py-8 text-sm">
                 <label class="font-semibold mb-4 text-lg">CONTACT</label>
@@ -182,7 +182,7 @@
                 <br>            
                 <button type="button" @click="showModal = true" class="text-left">login</button>
             </div>
-            <div class="w-full bg-white h-14 absolute bottom-0 flex items-center justify-center md:text-xs lg:text-sm xl:text-base font-semibold tracking-widest">
+            <div class="w-full bg-white h-9 md:h-14 absolute bottom-0 flex items-center justify-center text-xs lg:text-sm xl:text-base font-semibold tracking-widest">
                 Salsproject ©Copyright 2021
 
                 @if(session('error'))
@@ -200,6 +200,30 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+$("#leftScroll").click(function () { 
+  var leftPos = $('#outfittoday').scrollLeft();
+  $("#outfittoday").animate({scrollLeft: leftPos - 400}, 0);
+});
+
+$("#rightScroll").click(function () { 
+  var leftPos = $('#outfittoday').scrollLeft();
+  $("#outfittoday").animate({scrollLeft: leftPos + 400}, 0);
+});
+$("#topScroll").click(function () { 
+  var leftPos = $('#outfittoday1').scrollTop();
+  $("#outfittoday1").animate({scrollTop: leftPos - 200}, 0);
+ 
+});
+
+$("#botScroll").click(function () { 
+    var leftPos = $('#outfittoday1').scrollTop();
+  $("#outfittoday1").animate({scrollTop: leftPos + 200}, 0);
+
+});
+
+</script>
 
 <script>
     $(document).ready(function(){
