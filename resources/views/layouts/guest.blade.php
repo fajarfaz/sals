@@ -15,8 +15,8 @@
     <!-- Styles -->
 
      <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
 
     <style>
@@ -70,11 +70,55 @@
           transform: translateZ(40px);       
       }
   }
+      #loader {
+        position: absolute;
+
+        z-index: 1;
+        width: 120px;
+        height: 120px;
+
+    }
+
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Add animation to "page content" */
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+    }
+
+    #myDiv {
+        display: none;
+
   
 </style>
 
-<body class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
-<div id="loader"></div>
+<body onload="preloader(),AOS.init()" class="antialiased overflow-x-hidden" x-data="{ 'showModal': false, 'showModal1': false  }" @keydown.escape="showModal = false, showModal1 = false" x-cloak>
+    <div id="loader" class="inset-0 m-auto"> 
+        <img src="{{asset('images/logo.png')}}" class="object-contain animate-pulse bg-gray-200 p-4 rounded-full">
+    </div>
+    <div id="myDiv" class="animate-bottom ">
     <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="showModal" :class="{ 'fixed inset-0 z-40 flex items-center justify-center': showModal }">
         <!--Dialog-->
         <div class="bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg py-4 text-left px-6" x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
@@ -200,7 +244,7 @@
     </div>
 
 </div>
-
+</div>
 <script type="text/javascript">
 $("#leftScroll").click(function () { 
   var leftPos = $('#outfittoday').scrollLeft();
@@ -258,12 +302,32 @@ $("#botScroll").click(function () {
     });
 
 </script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script>
     var scroll = new SmoothScroll('a[href*="#"]', {
         speed: 300
     });
-    AOS.init();
+    
+
+    $(function() { 
+            $(window).on('scroll',function() 
+            { 
+                AOS.refresh();       
+                console.log('halo');              
+            }
+            ); 
+            
+        });
+
+        var myVar;
+        function preloader() {
+            myVar = setTimeout(showPage, 500);
+        }
+            function showPage() {
+
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
 </script>
 </body>
 </html>

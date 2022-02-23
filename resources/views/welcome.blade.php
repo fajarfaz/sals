@@ -250,7 +250,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
             <div class="border-2 border-white h-max md:w-max w-7/12 md:w-100 p-3 relative" data-aos="fade-down-left"> 
                 <img src="image/{{$settings[0]->outfitImage}}"  class="lg:w-[409px] md:w-[300px] lg:h-[632px] md:h-[532px]  object-cover object-center h-52 md:inline hidden">   
                 <img src="image/{{$settings[0]->outfitImage}}" style="height: 282px;" class="md:w-[183px] w-full object-cover object-center h-52 md:hidden inline">   
-                <label class="absolute -top-10 md:top-24 md:left-auto left-0 md:-right-28 font-semibold md:rotate-90 text-xl w-max md:h-min" >OUTFIT FOR TODAY</label>     
+                <label class="absolute -top-10 md:top-24 md:left-auto left-0 md:-right-28 font-semibold md:rotate-90 text-xl w-max md:h-min" >WEEKLY OUTFIT</label>     
             </div>
              
               
@@ -523,7 +523,7 @@ class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center font-semi
      <div class="flex flex-row items-center space-x-4">
               <form action="/productshow" class="flex my-auto relative">           
               
-                <input type="text" name="search" class="border bg-gray-200 pl-3 py-2 rounded-md h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-full" placeholder="Search .." value="{{request('search')}}">     
+                <input type="text" name="search" class="border bg-gray-50 pl-3 py-2 rounded-md h-full pr-16 active:bg-white focus:outline-none focus:ring focus:ring-blue-300 w-full" placeholder="Search .." value="{{request('search')}}">     
                 <button type="submit"  class="absolute right-0 inset-y-0 border bg-white border rounded-md text-gray-700 px-5 tracking-wider py-2 rounded-md font-semibold hover:bg-gray-100">
                 <i class="fas fa-search"></i>
                 </button>
